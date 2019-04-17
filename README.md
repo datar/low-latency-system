@@ -7,7 +7,10 @@ The goal is to collect a list of resouces to help people get better performance 
 ## Linux OS tuning
 
 - [Redhat Linux Performance Tuning Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/performance_tuning_guide/index)
-** A basic manual of tuning Linux OS.** It works with RHEL and Centos. Please select the right version number for your system.
+
+** A basic manual of tuning Linux OS. ** 
+
+It works with RHEL and Centos. Please select the right version number for your system.
  
 ## System tuning guides from server vendors
 
