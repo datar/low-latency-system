@@ -4,10 +4,12 @@ A collection of low latency system.
 
 The goal is to collect a list of resouces to help people get better performance in their system.
 
+## Linux OS tuning
 
+- [Redhat Linux Performance Tuning Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/performance_tuning_guide/index)
+** A basic manual of tuning Linux OS. ** It works with RHEL and Centos. Please select the right version number for your system.
  
-## System tuning
-
+## System tuning guides from server vendors
 
 - [Configuring and tuning HP ProLiant Servers for low-latency applications](https://support.hpe.com/hpsc/doc/public/display?docLocale=en_US&docId=emr_na-c01804533)
 This document will be updated months. The latest version is 201710.
