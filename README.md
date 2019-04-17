@@ -9,12 +9,13 @@ The goal is to collect a list of resouces to help people get better performance 
 ## System tuning
 
 
-- [Configuring and tuning HP ProLiant Servers for low-latency applications](http://h10032.www1.hp.com/ctg/Manual/c01804533.pdf)
-This document will be updated months. The latest version is 201607.
-
-- [Configuring and Tuning HP ProLiant Servers for Low-Latency Applications White Paper](https://www.sandisk.com/content/dam/sandisk-main/en_us/assets/resources/enterprise/partners/hp/white-papers/configuring_and_tuning_hp_servers_for_low-latency_applications-c01804533.pdf)
+- [Configuring and tuning HP ProLiant Servers for low-latency applications](https://support.hpe.com/hpsc/doc/public/display?docLocale=en_US&docId=emr_na-c01804533)
+This document will be updated months. The latest version is 201710.
 
 - [HPE Trade and Match Server: HPE ProLiant XL1x0r Gen9 servers using Intel Xeon E5-1680 v3 processors](https://www.hpe.com/h20195/v2/getpdf.aspx/4AA6-6103ENW.pdf?ver=4.0) A solution which uses 1 overclocking CPU to get best performance. 
+
+- [HPE Gen10 Servers Intelligent System
+Tuning](https://support.hpe.com/hpsc/doc/public/display?docId=a00018313en_us) HP's new tech to remove jitters in G10 system.
 
 - [HP Gen8 technologies for low latency, high performance trading and exchanges](http://www.flaggmgmt.com/hpc/ppt/session-9_patrickgreene.pdf)
 
@@ -236,3 +237,9 @@ It's a very old solution that looks like system has not been tuned well.
 - [intelligent trading technology from A-Team](http://intelligenttradingtechnology.com/)
 
 - [nextplatform](http://www.nextplatform.com)
+
+## About
+
+- [My LinkedIn Page](https://www.linkedin.com/in/masterchen/)
+- [chenxing@live.com](mailto:chenxing@live.com)
+- 微信 Wechat: trador
