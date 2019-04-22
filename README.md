@@ -1,8 +1,14 @@
+---
+---
+
 # Low Latency System
 
-A collection of low latency system.
+A collection of everything about low latency system.
 
-The goal is to collect a list of resouces to help people get better performance in their system.
+The goal is to collect resouces to help people to get better performance in their system.
+
+## Level a message
+If you have anything about this project, please submit a [GitHub issue here](https://github.com/datar/low-latency-system/issues).
 
 ## Linux OS tuning
 
