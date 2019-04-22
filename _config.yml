@@ -1,2 +1,8 @@
-layout: "default"
 google_analytics: UA-75987842-3
+defaults:
+  -
+    scope:
+      path: "index.md"
+    values:
+      title: "Low Latency System"
+      layout: "default"
