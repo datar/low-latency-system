@@ -1,6 +1,3 @@
----
----
-
 # Low Latency System
 
 A collection of everything about low latency system.
