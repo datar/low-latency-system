@@ -2,7 +2,7 @@
 
 A collection of everything about low latency system.
 
-The goal is to collect resouces to help people to get better performance in their system.
+The goal is to collect resources to help people to get better performance in their system.
 
 ## Level a message
 If you have anything about this project, please submit a [GitHub issue here](https://github.com/datar/low-latency-system/issues).
@@ -12,7 +12,7 @@ If you have anything about this project, please submit a [GitHub issue here](htt
 - [Redhat Linux Performance Tuning Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/performance_tuning_guide/index)
 **A basic manual of tuning Linux OS.** It works with RHEL and Centos. Please select the right version number for your system.
 
-- [Red Hat Enterprise Linux Network Performance Tuning Guide](https://access.redhat.com/articles/1391433) How to tune network stack in kernel. A low latency system should use kernel bypass instead of kernel stack to improve the performance.
+- [Red Hat Enterprise Linux Network Performance Tuning Guide](https://access.redhat.com/articles/1391433) How to tune network stack in Linux kernel. A low latency system should use kernel bypass instead of kernel stack to improve the performance.
 
  
 ## System tuning guides from server vendors
@@ -20,12 +20,12 @@ If you have anything about this project, please submit a [GitHub issue here](htt
 - [Configuring and tuning HP ProLiant Servers for low-latency applications](https://support.hpe.com/hpsc/doc/public/display?docLocale=en_US&docId=emr_na-c01804533)
 This document will be updated months. The latest version is 201710.
 
-- [HPE Trade and Match Server: HPE ProLiant XL1x0r Gen9 servers using Intel Xeon E5-1680 v3 processors](https://www.hpe.com/h20195/v2/getpdf.aspx/4AA6-6103ENW.pdf?ver=4.0) A solution which uses 1 overclocking CPU to get best performance. 
+- [HPE Trade and Match Server: HPE ProLiant XL1x0r Gen9 servers using Intel Xeon E5-1680 v3 processors](https://www.hpe.com/h20195/v2/getpdf.aspx/4AA6-6103ENW.pdf?ver=4.0) A solution which uses 1 overclocking CPU to get the best performance. 
 
 - [HPE Gen10 Servers Intelligent System
 Tuning](https://support.hpe.com/hpsc/doc/public/display?docId=a00018313en_us) HP's new tech to remove jitters in G10 system.
 
-- [HP Gen8 technologies for low latency, high performance trading and exchanges](http://www.flaggmgmt.com/hpc/ppt/session-9_patrickgreene.pdf)
+- [HP Gen8 technologies for low latency, high-performance trading, and exchanges](http://www.flaggmgmt.com/hpc/ppt/session-9_patrickgreene.pdf)
 
 - [Supermicro HFT-Optimized Servers and the ExaNIC](https://exablaze.com/media/blog-supermicro-latency)
 
@@ -43,7 +43,7 @@ Tuning](https://support.hpe.com/hpsc/doc/public/display?docId=a00018313en_us) HP
 - [Optimizing Linux performance on HP Integrity Superdome X](http://www8.hp.com/h20195/v2/GetPDF.aspx/4AA5-9698ENW.pdf)
 
 - [Optimizing for low latency](https://software.intel.com/sites/default/files/managed/07/f3/low_latency_presentation.pdf)
-- [Blog from a guy working in LMAX](http://epickrram.blogspot.co.uk/)
+- [A blog from a guy working in LMAX](http://epickrram.blogspot.co.uk/)
     - [Reducing system jitters part 1](http://epickrram.blogspot.co.uk/2015/09/reducing-system-jitter.html)
     - [Reducing system jitters part 2](http://epickrram.blogspot.co.uk/2015/11/reducing-system-jitter-part-2.html)
 
@@ -52,7 +52,7 @@ Tuning](https://support.hpe.com/hpsc/doc/public/display?docId=a00018313en_us) HP
 
 - [Network tuning and performance](https://calomel.org/network_performance.html)
 
-- [Solarflare Server Adapter User Guide:Performance Tuning on Linux](http://solarflare.com)
+- [Solarflare Server Adapter User Guide: Performance Tuning on Linux](http://solarflare.com)
 
 ## Benchmarks and tools
 
@@ -90,8 +90,8 @@ Tuning](https://support.hpe.com/hpsc/doc/public/display?docId=a00018313en_us) HP
 
 ## Solarflare
 - [OpenOnload Google Talk](http://www.openonload.org/openonload-google-talk.pdf)
-Compared different accelate technology
-approach that solarflare used in openonload
+Compared different accelerate technology
+approach that Solarflare used in OpenOnload
 compared latency, bandwidth by using openonload and kernel
 
 - [ASICs argued with FPGAs](https://www.hotchips.org/wp-content/uploads/hc_archives/hc24/HC24-2-Fabric/HC24.28.220-FPGA-ASICs-Riddoch-Solarflare.pdf)
@@ -110,7 +110,7 @@ compared latency, bandwidth by using openonload and kernel
 
 - [InfiniBand Technology Overview](http://www.snia.org/sites/default/education/tutorials/2008/spring/networking/Goldenberg-D_InfiniBand_Technology_Overview.pdf) An advanced introduction to IB
 
-- [introduction to Infiniband](http://services.geant.net/edupert/Resources/Documents/IntroductiontoInfiniband_Hussein.pdf) just a simple introduction. Only advantage is there are many diagram.
+- [introduction to Infiniband](http://services.geant.net/edupert/Resources/Documents/IntroductiontoInfiniband_Hussein.pdf) just a simple introduction. The only advantage is there are many diagrams.
 
 - [Introduction to InfiniBand](http://www.mellanox.com/pdf/whitepapers/IB_Intro_WP_190.pdf) 
  An introduction to IB from Mellanox whitepaper.
@@ -235,7 +235,7 @@ It's a very old solution that looks like system has not been tuned well.
 
 - [Intel hybrid CPU+FPGA](http://www.embeddedintel.com/commentary.php?article=2143)
 
-- [FPGA developer](http://www.fpgadeveloper.com/) A FPGA site that focus on tech not finance solution.
+- [FPGA developer](http://www.fpgadeveloper.com/) A FPGA site that focuses on tech not finance solution.
 
 - [How are HFT systems implemented on FPGA nowadays](http://quant.stackexchange.com/questions/10519/how-are-hft-systems-implemented-on-fpga-nowadays) A QA on stackexchange
 
