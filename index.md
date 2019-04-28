@@ -170,8 +170,7 @@ How to tune libvma and other tools from mellanox to improve network performance.
 
 
 ## Unsort
-
-- [Ultra Low Latency Trading Systems: A blog about techniques used to build www.SubMicroTrading.com](submicro.blogspot.com)
+These resources will be moved to right topics later.
 - [Performance Analysis](https://wiki.mikejung.biz/Performance_Analysis)
 - [A Low-Latency Solution for High Frequecy Trading From IBM and Solarflare](http://www.moderntech.com.hk/sites/default/files/whitepaper/V10_A%20Low-Latency_Solution_for_High-Frequency_Trading_from_IBM_and_Solarflare_0.pdf)
 It's a very old solution that looks like system has not been tuned well.
@@ -198,10 +197,14 @@ It's a very old solution that looks like system has not been tuned well.
 
 - [Technology in banking – a problem in scale and complexity](http://web.stanford.edu/class/ee380/Abstracts/110511-slides.pdf)
 
-- [Low-latency networks for trading infrastructure Fujitsu](https://www.fujitsu.com/us/Images/LowlatencyTrading.pdf
-) A introduction of Fujitsu's optical infrastruction.
+- [Low-latency networks for trading infrastructure Fujitsu](https://www.fujitsu.com/us/Images/LowlatencyTrading.pdf) An introduction of Fujitsu's optical infrastruction.
 
 - [Topics in High Performance Messaging](https://www.informatica.com/downloads/1568_high_perf_messaging_wp/Topics-in-High-Performance-Messaging.htm)
+
+- [intelligent trading technology from A-Team](http://intelligenttradingtechnology.com/)
+
+- [nextplatform](http://www.nextplatform.com)
+
 
 ## Report, Whitepaper
 
@@ -240,14 +243,22 @@ It's a very old solution that looks like system has not been tuned well.
 - [How are HFT systems implemented on FPGA nowadays](http://quant.stackexchange.com/questions/10519/how-are-hft-systems-implemented-on-fpga-nowadays) A QA on stackexchange
 
 
-## resource
+## Programming languages
 
-- [intelligent trading technology from A-Team](http://intelligenttradingtechnology.com/)
+The choices are not so many for low latency system.
 
-- [nextplatform](http://www.nextplatform.com)
+### Java
+- [Zing. A JVM solution](https://www.azul.com) Zing is a JVM solution for performance critical usage.
+- [Ultra Low Latency Trading Systems: A blog about techniques used to build www.SubMicroTrading.com](submicro.blogspot.com)
 
-## About
+### C++
+- [CppCon 2017: Fedor Pikus “C++ atomics, from basic to advanced. What do they really do?”](https://www.youtube.com/watch?v=ZQFzMfHIxng)
+- [ACCU 2017: Lock-free programming with modern C++ - Timur Doumler ](https://www.youtube.com/watch?v=qdrp6k4rcP4)
+- [CppCon 2014: Herb Sutter "Lock-Free Programming Part I"](https://www.youtube.com/watch?v=c1gO9aB9nbs)
+- [CppCon 2014: Herb Sutter "Lock-Free Programming Part II"](https://www.youtube.com/watch?v=CmxkPChOcv)
+
+## About me
 
 - [My LinkedIn Page](https://www.linkedin.com/in/masterchen/)
 - [chenxing@live.com](mailto:chenxing@live.com)
-- 微信 Wechat: trador
+- Wechat if you know: trador
