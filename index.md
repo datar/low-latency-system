@@ -10,13 +10,17 @@ If you have anything about this project, please submit a [GitHub issue here](htt
 ## Linux OS tuning
 
 - [Redhat Linux Performance Tuning Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/performance_tuning_guide/index)
-**A basic manual of tuning Linux OS.** It works with RHEL and Centos. Please select the right version number for your system.
+**A basic manual of tuning Linux OS.** Concepts and tools are introducted in this article. It's a perfect entry of performance optimization. It works with RHEL and Centos. Other distributions may have different tool chains. But the concepts are similar. Please select the right version number for your system.
+
+- [Low Latency Performance Tuning for Red Hat Enterprise Linux 7](https://access.redhat.com/articles/1323793) Based on concetpts introduced in the article above, this article focuses on how to get low latency. To access this article needs a Red Hat account.
 
 - [Red Hat Enterprise Linux Network Performance Tuning Guide](https://access.redhat.com/articles/1391433) How to tune network stack in Linux kernel. A low latency system should use kernel bypass instead of kernel stack to improve the performance.
 
+- [Performance Analysis and Tuning of Red Hat Enterprise Linux](https://github.com/major/redhat-summit-2015-notes/blob/master/2015-06-24/Performance%20Analysis%20and%20Tuning%20of%20Red%20Hat%20Enterprise%20Linux.md)
  
 ## System tuning guides from server vendors
 
+### HP
 - [Configuring and tuning HP ProLiant Servers for low-latency applications](https://support.hpe.com/hpsc/doc/public/display?docLocale=en_US&docId=emr_na-c01804533)
 This document will be updated months. The latest version is 201710.
 
@@ -27,28 +31,34 @@ Tuning](https://support.hpe.com/hpsc/doc/public/display?docId=a00018313en_us) HP
 
 - [HP Gen8 technologies for low latency, high-performance trading, and exchanges](http://www.flaggmgmt.com/hpc/ppt/session-9_patrickgreene.pdf)
 
+- [HP Gen8 technologies for low latency, high performance trading and exchanges](http://www.flaggmgmt.com/hpc/ppt/session-9_patrickgreene.pdf)
+
+- [Optimizing Linux performance on HP Integrity Superdome X](http://www8.hp.com/h20195/v2/GetPDF.aspx/4AA5-9698ENW.pdf)
+
+
+### Supermicro
 - [Supermicro HFT-Optimized Servers and the ExaNIC](https://exablaze.com/media/blog-supermicro-latency)
 
+
+### Dell
 - [Configuring Low-Latency Environments on Dell PowerEdge Servers](http://www.dell.com/downloads/global/products/pedge/en/configuring_dell_powerEdge_servers_for_low_latency_12132010_final.pdf)
 
 - [Optimizing the High Frequency Trading GatiRT* Application on the latest Intel® Architecture Server](https://software.intel.com/en-us/articles/optimizing-the-high-frequency-trading-gatirt-application-on-the-latest-intel-architecture)
 
-
-- [HP Gen8 technologies for low latency, high performance trading and exchanges](http://www.flaggmgmt.com/hpc/ppt/session-9_patrickgreene.pdf)
-
 - [Reducing OS-Jitter, (Frame Latency, Latency, Stutter)](http://www.tomshardware.com/faq/id-2477508/reducing-jitter-frame-latency-latency-stutter.html)
 
-- [Performance Analysis and Tuning of Red Hat Enterprise Linux](https://github.com/major/redhat-summit-2015-notes/blob/master/2015-06-24/Performance%20Analysis%20and%20Tuning%20of%20Red%20Hat%20Enterprise%20Linux.md)
+### lenovo
 
-- [Optimizing Linux performance on HP Integrity Superdome X](http://www8.hp.com/h20195/v2/GetPDF.aspx/4AA5-9698ENW.pdf)
+
+### Other
+- [Linux Performance and Tuning Guidelines](https://lenovopress.com/redp4285)
+    - [中文版](https://www.gitbook.com/book/lihz1990/transoflptg/details)
 
 - [Optimizing for low latency](https://software.intel.com/sites/default/files/managed/07/f3/low_latency_presentation.pdf)
 - [A blog from a guy working in LMAX](http://epickrram.blogspot.co.uk/)
     - [Reducing system jitters part 1](http://epickrram.blogspot.co.uk/2015/09/reducing-system-jitter.html)
     - [Reducing system jitters part 2](http://epickrram.blogspot.co.uk/2015/11/reducing-system-jitter-part-2.html)
 
-- [Linux Performance and Tuning Guidelines](https://lenovopress.com/redp4285)
-    - [中文版](https://www.gitbook.com/book/lihz1990/transoflptg/details)
 
 - [Network tuning and performance](https://calomel.org/network_performance.html)
 
