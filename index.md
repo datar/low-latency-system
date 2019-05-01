@@ -62,7 +62,7 @@ Tuning](https://support.hpe.com/hpsc/doc/public/display?docId=a00018313en_us) HP
 
 - [Network tuning and performance](https://calomel.org/network_performance.html)
 
-- [Solarflare Server Adapter User Guide: Performance Tuning on Linux](http://solarflare.com)
+- [Solarflare Server Adapter User Guide](https://support.solarflare.com/index.php/component/cognidox/?view=categories&id=1945) This user guide contains a chapter *Performance Tuning on Linux* which 
 
 ## Benchmarks and tools
 
