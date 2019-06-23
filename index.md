@@ -2,7 +2,7 @@
 
 A collection of everything about low latency system.
 
-The goal is to collect resources to help people to get better performance in their system.
+The goal of this project is to collect resources that help people to get better performance in their system.
 
 ## Level a message
 If you have anything about this project, please submit a [GitHub issue here](https://github.com/datar/low-latency-system/issues).
@@ -10,21 +10,24 @@ If you have anything about this project, please submit a [GitHub issue here](htt
 ## Linux OS tuning
 
 - [Redhat Linux Performance Tuning Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/performance_tuning_guide/index)
-**A basic manual of tuning Linux OS.** Concepts and tools are introducted in this article. It's a perfect entry of performance optimization. It works with RHEL and Centos. Other distributions may have different tool chains. But the concepts are similar. Please select the right version number for your system.
+**A essential manual of tuning Linux OS.** Concepts and tools are introducted in this article. It's a perfect entry of performance optimization. It works with RHEL and Centos. Other distributions may have different tool chains. But the concepts are similar. Please select the right version number for your system.
 
 - [Low Latency Performance Tuning for Red Hat Enterprise Linux 7](https://access.redhat.com/articles/1323793) Based on concetpts introduced in the article above, this article focuses on how to get low latency. To access this article needs a Red Hat account.
 
-- [Red Hat Enterprise Linux Network Performance Tuning Guide](https://access.redhat.com/articles/1391433) How to tune network stack in Linux kernel. A low latency system should use kernel bypass instead of kernel stack to improve the performance.
+- [Red Hat Enterprise Linux Network Performance Tuning Guide](https://access.redhat.com/articles/1391433) How to tune network stack in Linux kernel. Most of low latency trading system use kernel bypass to reduce network latency.
 
-- [Performance Analysis and Tuning of Red Hat Enterprise Linux](https://github.com/major/redhat-summit-2015-notes/blob/master/2015-06-24/Performance%20Analysis%20and%20Tuning%20of%20Red%20Hat%20Enterprise%20Linux.md)
+- Talks on Redhat Summit: Performance analysis and tuning of Red Hat Enterprise Linux, This talk series shows how engineers think about performance tuning and their practices.
+    - Videos: [2018 Part 1](https://www.redhat.com/en/about/videos/summit-2018-performance-analysis-and-tuning-red-hat-enterprise-linux-part-1), [2018 Part 2](https://www.redhat.com/en/about/videos/summit-2018-performance-analysis-and-tuning-red-hat-enterprise-linux-part-2)
+    - [Notes of 2015 talk](https://github.com/major/redhat-summit-2015-notes/blob/master/2015-06-24/Performance%20Analysis%20and%20Tuning%20of%20Red%20Hat%20Enterprise%20Linux.md) 
  
 ## System tuning guides from server vendors
+Server vendors have their own tuning guides. Generally, a tuning guide from server vendor contains similar sections which are hardware tuning, OS tuning, network tuning, benchmark test, etc. In a hardware tuning section, there would be some options about turning on high performance mode on a server. Some subtle differences would be in OS tuning section.
 
 ### HP
 - [Configuring and tuning HP ProLiant Servers for low-latency applications](https://support.hpe.com/hpsc/doc/public/display?docLocale=en_US&docId=emr_na-c01804533)
-This document will be updated months. The latest version is 201710.
+This document updates when HP releases new sku. The latest version is 201710.
 
-- [HPE Trade and Match Server: HPE ProLiant XL1x0r Gen9 servers using Intel Xeon E5-1680 v3 processors](https://www.hpe.com/h20195/v2/getpdf.aspx/4AA6-6103ENW.pdf?ver=4.0) A solution which uses 1 overclocking CPU to get the best performance. 
+- [HPE Trade and Match Server: HPE ProLiant XL1x0r Gen9 servers using Intel Xeon E5-1680 v3 processors](https://www.hpe.com/h20195/v2/getpdf.aspx/4AA6-6103ENW.pdf?ver=4.0) A solution which uses 1 overclocking CPU to get higher CPU frequency than dual socket servers. 
 
 - [HPE Gen10 Servers Intelligent System
 Tuning](https://support.hpe.com/hpsc/doc/public/display?docId=a00018313en_us) HP's new tech to remove jitters in G10 system.
