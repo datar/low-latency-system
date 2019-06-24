@@ -51,21 +51,32 @@ Tuning](https://support.hpe.com/hpsc/doc/public/display?docId=a00018313en_us) HP
 - [Reducing OS-Jitter, (Frame Latency, Latency, Stutter)](http://www.tomshardware.com/faq/id-2477508/reducing-jitter-frame-latency-latency-stutter.html)
 
 ### lenovo
-
-
-### Other
 - [Linux Performance and Tuning Guidelines](https://lenovopress.com/redp4285)
     - [中文版](https://www.gitbook.com/book/lihz1990/transoflptg/details)
 
-- [Optimizing for low latency](https://software.intel.com/sites/default/files/managed/07/f3/low_latency_presentation.pdf)
-- [A blog from a guy working in LMAX](http://epickrram.blogspot.co.uk/)
-    - [Reducing system jitters part 1](http://epickrram.blogspot.co.uk/2015/09/reducing-system-jitter.html)
-    - [Reducing system jitters part 2](http://epickrram.blogspot.co.uk/2015/11/reducing-system-jitter-part-2.html)
 
+## Tuning Guides from Intel and AMD
+
+Few year ago, Intel Xeon CPU was the only choice for low latency system. It provides enough cores, CPU frequency, cache capacity, etc. Overclocked dual 2600 series CPU was the mainstream solution. Some scenarios would choose single 1600 series CPU for higher frequency. Xeon CPU has a problem. They only could be overclocked via base clock. That means only 1 digit percentage of frequency increasement. Core i5/i7 series CPU could provide high overclocked ratio. But the core number was a problem util core i9 released. A top core i9 CPU like i9-7980XE has 18 cores with 4.2 GHz turbo frequency. Some vendors can make all cores running at 4.6+ GHz. Single socket solution removes the latency between CPUs. Servers based on i9 is mainstream solution now. The same thing happened with AMD. AMD's EPYC CPU is another choice now.
+
+### Intel
+- [Optimizing Computer Applications for Latency: configuring the hardware](https://software.intel.com/en-us/articles/optimizing-computer-applications-for-latency-part-1-configuring-the-hardware)
+
+- [Optimizing Computer Applications for Latency: tuning applications](https://software.intel.com/en-us/articles/optimizing-computer-applications-for-latency-part-2-tuning-applications)
+
+- [Optimizing for low latency](https://software.intel.com/sites/default/files/managed/07/f3/low_latency_presentation.pdf)
+
+### AMD
+- [Performance tuning guidelines](http://developer.amd.com/wp-content/resources/56263-Performance-Tuning-Guidelines-PUB.pdf)
+
+
+## Network Tuning Guides
 
 - [Network tuning and performance](https://calomel.org/network_performance.html)
 
 - [Solarflare Server Adapter User Guide](https://support.solarflare.com/index.php/component/cognidox/?view=categories&id=1945) This user guide contains a chapter *Performance Tuning on Linux* which 
+
+
 
 ## Benchmarks and tools
 
@@ -217,6 +228,13 @@ It's a very old solution that looks like system has not been tuned well.
 - [intelligent trading technology from A-Team](http://intelligenttradingtechnology.com/)
 
 - [nextplatform](http://www.nextplatform.com)
+
+### Other
+
+
+- [A blog from a guy working in LMAX](http://epickrram.blogspot.co.uk/)
+    - [Reducing system jitters part 1](http://epickrram.blogspot.co.uk/2015/09/reducing-system-jitter.html)
+    - [Reducing system jitters part 2](http://epickrram.blogspot.co.uk/2015/11/reducing-system-jitter-part-2.html)
 
 
 ## Report, Whitepaper
