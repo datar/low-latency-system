@@ -1,18 +1,18 @@
 # Low Latency System
 
-A collection of everything about low latency system.
+A collection of everything about low latency systems.
 
 The goal of this project is to collect resources that help people to get better performance in their system.
 
-## Level a message
+## Leave a message
 If you have anything about this project, please submit a [GitHub issue here](https://github.com/datar/low-latency-system/issues).
 
 ## Linux OS tuning
 
 - [Redhat Linux Performance Tuning Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/performance_tuning_guide/index)
-**A essential manual of tuning Linux OS.** Concepts and tools are introducted in this article. It's a perfect entry of performance optimization. It works with RHEL and Centos. Other distributions may have different tool chains. But the concepts are similar. Please select the right version number for your system.
+**An essential manual of tuning Linux OS.** Concepts and tools are introduced in this article. It's a perfect entry of performance optimization. It works with RHEL and Centos. Other distributions may have different toolchains. But the concepts are similar. Please select the right version number for your system.
 
-- [Low Latency Performance Tuning for Red Hat Enterprise Linux 7](https://access.redhat.com/articles/1323793) Based on concetpts introduced in the article above, this article focuses on how to get low latency. To access this article needs a Red Hat account.
+- [Low Latency Performance Tuning for Red Hat Enterprise Linux 7](https://access.redhat.com/articles/1323793) Based on concepts introduced in the article above, this article focuses on how to get low latency. To access this article needs a Red Hat account.
 
 - [Red Hat Enterprise Linux Network Performance Tuning Guide](https://access.redhat.com/articles/1391433) How to tune network stack in Linux kernel. Most of low latency trading system use kernel bypass to reduce network latency.
 
@@ -21,13 +21,13 @@ If you have anything about this project, please submit a [GitHub issue here](htt
     - [Notes of 2015 talk](https://github.com/major/redhat-summit-2015-notes/blob/master/2015-06-24/Performance%20Analysis%20and%20Tuning%20of%20Red%20Hat%20Enterprise%20Linux.md) 
  
 ## System tuning guides from server vendors
-Server vendors have their own tuning guides. Generally, a tuning guide from server vendor contains similar sections which are hardware tuning, OS tuning, network tuning, benchmark test, etc. In a hardware tuning section, there would be some options about turning on high performance mode on a server. Some subtle differences would be in OS tuning section.
+Server vendors have their tuning guides. Generally, a tuning guide from a server vendor contains similar sections which are hardware tuning, OS tuning, network tuning, benchmark test, etc. In a hardware tuning section, there would be some options about turning on high performance mode on a server. Some subtle differences would be in OS tuning section.
 
 ### HP
 - [Configuring and tuning HP ProLiant Servers for low-latency applications](https://support.hpe.com/hpsc/doc/public/display?docLocale=en_US&docId=emr_na-c01804533)
 This document updates when HP releases new sku. The latest version is 201710.
 
-- [HPE Trade and Match Server: HPE ProLiant XL1x0r Gen9 servers using Intel Xeon E5-1680 v3 processors](https://www.hpe.com/h20195/v2/getpdf.aspx/4AA6-6103ENW.pdf?ver=4.0) A solution which uses 1 overclocking CPU to get higher CPU frequency than dual socket servers. 
+- [HPE Trade and Match Server: HPE ProLiant XL1x0r Gen9 servers using Intel Xeon E5-1680 v3 processors](https://www.hpe.com/h20195/v2/getpdf.aspx/4AA6-6103ENW.pdf?ver=4.0) A solution that uses 1 overclocking CPU to get higher CPU frequency than dual socket servers. 
 
 - [HPE Gen10 Servers Intelligent System
 Tuning](https://support.hpe.com/hpsc/doc/public/display?docId=a00018313en_us) HP's new tech to remove jitters in G10 system.
@@ -57,7 +57,7 @@ Tuning](https://support.hpe.com/hpsc/doc/public/display?docId=a00018313en_us) HP
 
 ## Tuning Guides from Intel and AMD
 
-Few year ago, Intel Xeon CPU was the only choice for low latency system. It provides enough cores, CPU frequency, cache capacity, etc. Overclocked dual 2600 series CPU was the mainstream solution. Some scenarios would choose single 1600 series CPU for higher frequency. Xeon CPU has a problem. They only could be overclocked via base clock. That means only 1 digit percentage of frequency increasement. Core i5/i7 series CPU could provide high overclocked ratio. But the core number was a problem util core i9 released. A top core i9 CPU like i9-7980XE has 18 cores with 4.2 GHz turbo frequency. Some vendors can make all cores running at 4.6+ GHz. Single socket solution removes the latency between CPUs. Servers based on i9 is mainstream solution now. The same thing happened with AMD. AMD's EPYC CPU is another choice now.
+Few years ago, Intel Xeon CPU was the only choice for a low latency system. It provides enough cores, CPU frequency, cache capacity, etc. Overclocked dual 2600 series CPU was the mainstream solution. Some scenarios would choose a single 1600 series CPU for higher frequency. Xeon CPU has a problem. They only could be overclocked via the base clock. That means only 1 digit percentage of frequency increment. Core i5/i7 series CPU could provide a high overclocked ratio. But the core number was a problem until core i9 released. A top core i9 CPU like i9-7980XE has 18 cores with 4.2 GHz turbo frequency. Some vendors can make all cores running at 4.6+ GHz. A single socket solution removes the latency between CPUs. Servers based on i9 is a mainstream solution now. The same thing happened with AMD. AMD's EPYC CPU is another choice now.
 
 ### Intel
 - [Optimizing Computer Applications for Latency: configuring the hardware](https://software.intel.com/en-us/articles/optimizing-computer-applications-for-latency-part-1-configuring-the-hardware)
@@ -197,7 +197,7 @@ How to tune libvma and other tools from mellanox to improve network performance.
 These resources will be moved to right topics later.
 - [Performance Analysis](https://wiki.mikejung.biz/Performance_Analysis)
 - [A Low-Latency Solution for High Frequecy Trading From IBM and Solarflare](http://www.moderntech.com.hk/sites/default/files/whitepaper/V10_A%20Low-Latency_Solution_for_High-Frequency_Trading_from_IBM_and_Solarflare_0.pdf)
-It's a very old solution that looks like system has not been tuned well.
+It's a very old solution that looks like a system has not been tuned well.
 - [Low Latency in Linux kernel](http://www.linuxdevcenter.com/pub/a/linux/2000/11/17/low_latency.html)
  An article from 2000. Very very old.
 - [Optimizing System Performance](http://linux-sunxi.org/Optimizing_system_performance)
@@ -221,7 +221,7 @@ It's a very old solution that looks like system has not been tuned well.
 
 - [Technology in banking – a problem in scale and complexity](http://web.stanford.edu/class/ee380/Abstracts/110511-slides.pdf)
 
-- [Low-latency networks for trading infrastructure Fujitsu](https://www.fujitsu.com/us/Images/LowlatencyTrading.pdf) An introduction of Fujitsu's optical infrastruction.
+- [Low-latency networks for trading infrastructure Fujitsu](https://www.fujitsu.com/us/Images/LowlatencyTrading.pdf) An introduction of Fujitsu's optical infrastructure.
 
 - [Topics in High Performance Messaging](https://www.informatica.com/downloads/1568_high_perf_messaging_wp/Topics-in-High-Performance-Messaging.htm)
 
