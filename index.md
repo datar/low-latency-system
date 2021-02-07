@@ -72,11 +72,21 @@ Few years ago, Intel Xeon CPU was the only choice for a low latency system. It p
 
 ## Network Tuning Guides
 
-- [Network tuning and performance](https://calomel.org/network_performance.html)
-
+### Solarflare
 - [Solarflare Server Adapter User Guide](https://support.solarflare.com/index.php/component/cognidox/?view=categories&id=1945) This user guide contains a chapter *Performance Tuning on Linux* which 
 
 
+### Mellanox
+- Performance Tuning Guide for Mellanox Network Adapters
+  - [out date](http://www.mellanox.com/related-docs/prod_software/Performance_Tuning_Guide_for_Mellanox_Network_Adapters.pdf)
+  - [the latest](https://community.mellanox.com/docs/DOC-2489)
+
+- How to tune libvma and other tools from mellanox to improve network performance.
+  - [VMA Performance Tuning Guide](https://community.mellanox.com/s/article/vma-performance-tuning-guide)
+  - [Mellanox AcademyIntroduction to InfiniBand](https://rmacc.org/sites/default/files/RMACC%208-10-15.pdf)
+
+### Other
+- [Network tuning and performance](https://calomel.org/network_performance.html)
 
 ## Benchmarks and tools
 
@@ -148,24 +158,13 @@ compared latency, bandwidth by using openonload and kernel
 
 - [Get Started with Infiniband](http://people.redhat.com/dledford/infiniband_get_started.html)
 
+## Other
+
 - [PF_RING](http://www.ntop.org/products/packet-capture/pf_ring/pf_ring-zc-zero-copy/)
 
 ## Zero Copy
 
 - [Zero Copy I: User-Mode Perspective](http://www.linuxjournal.com/article/6345)
-
-## Mellanox
-- Performance Tuning Guide for Mellanox Network Adapters
-
-  - [out date](http://www.mellanox.com/related-docs/prod_software/Performance_Tuning_Guide_for_Mellanox_Network_Adapters.pdf)
-  - [the latest](https://community.mellanox.com/docs/DOC-2489)
-
-How to tune libvma and other tools from mellanox to improve network performance.
-
-- [VMA Performance Tuning Guide](https://community.mellanox.com/docs/DOC-2797)
-
-- [Mellanox AcademyIntroduction to InfiniBand](https://rmacc.org/sites/default/files/RMACC%208-10-15.pdf)
-
 
 ## Time tech
 
