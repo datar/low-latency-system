@@ -4,7 +4,7 @@ Please visit [LowLatencySystem.com](https://lowlatencysystem.com) for details.
 
 ## About this project
 - It is a collection of resources to build a low latency (trading) system.
-- all of the materials are from public area. You can find them on internet by yourself. 
+- All of the materials are from public area. You can find them on internet by yourself. 
 - I hope this project helps people save time. Time is money. 
 
 ## About me
