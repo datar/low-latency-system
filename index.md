@@ -1,8 +1,8 @@
 # Low Latency System
 
-A collection of everything about low latency systems.
+A comprehensive collection of resources for building low-latency systems.
 
-The goal of this project is to collect resources that help people to get better performance in their system.
+The goal of this project is to collect resources that help engineers achieve better performance in their systems.
 
 ## Leave a message
 If you have anything about this project, please submit a [GitHub issue here](https://github.com/datar/low-latency-system/issues).
@@ -12,16 +12,16 @@ If you have anything about this project, please submit a [GitHub issue here](htt
 - [Redhat Linux Performance Tuning Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/performance_tuning_guide/index)
 **An essential manual of tuning Linux OS.** Concepts and tools are introduced in this article. It's a perfect entry of performance optimization. It works with RHEL and Centos. Other distributions may have different toolchains. But the concepts are similar. Please select the right version number for your system.
 
-- [Low Latency Performance Tuning for Red Hat Enterprise Linux 7](https://access.redhat.com/articles/1323793) Based on concepts introduced in the article above, this article focuses on how to get low latency. To access this article needs a Red Hat account.
+- [Low Latency Performance Tuning for Red Hat Enterprise Linux 7](https://access.redhat.com/articles/1323793) Based on concepts introduced in the article above, this article focuses on achieving low latency. Accessing this article requires a Red Hat account.
 
-- [Red Hat Enterprise Linux Network Performance Tuning Guide](https://access.redhat.com/articles/1391433) How to tune network stack in Linux kernel. Most of low latency trading system use kernel bypass to reduce network latency.
+- [Red Hat Enterprise Linux Network Performance Tuning Guide](https://access.redhat.com/articles/1391433) How to tune the network stack in the Linux kernel. Most low-latency trading systems use kernel bypass to reduce network latency.
 
 - Talks on Redhat Summit: Performance analysis and tuning of Red Hat Enterprise Linux, This talk series shows how engineers think about performance tuning and their practices.
     - Videos: [2018 Part 1](https://www.redhat.com/en/about/videos/summit-2018-performance-analysis-and-tuning-red-hat-enterprise-linux-part-1), [2018 Part 2](https://www.redhat.com/en/about/videos/summit-2018-performance-analysis-and-tuning-red-hat-enterprise-linux-part-2)
     - [Notes of 2015 talk](https://github.com/major/redhat-summit-2015-notes/blob/master/2015-06-24/Performance%20Analysis%20and%20Tuning%20of%20Red%20Hat%20Enterprise%20Linux.md) 
  
 ## System tuning guides from server vendors
-Server vendors have their tuning guides. Generally, a tuning guide from a server vendor contains similar sections which are hardware tuning, OS tuning, network tuning, benchmark test, etc. In a hardware tuning section, there would be some options about turning on high performance mode on a server. Some subtle differences would be in OS tuning section.
+Server vendors provide their own tuning guides. Generally, these guides contain similar sections: hardware tuning, OS tuning, network tuning, and benchmark tests. Hardware tuning sections typically cover enabling high-performance mode on servers. Subtle differences can be found in the OS tuning sections.
 
 ### HP
 - [Configuring and tuning HP ProLiant Servers for low-latency applications](https://support.hpe.com/hpsc/doc/public/display?docLocale=en_US&docId=emr_na-c01804533)
@@ -32,9 +32,7 @@ This document updates when HP releases new sku. The latest version is 201710.
 - [HPE Gen10 Servers Intelligent System
 Tuning](https://support.hpe.com/hpsc/doc/public/display?docId=a00018313en_us) HP's new tech to remove jitters in G10 system.
 
-- [HP Gen8 technologies for low latency, high-performance trading, and exchanges](http://www.flaggmgmt.com/hpc/ppt/session-9_patrickgreene.pdf)
-
-- [HP Gen8 technologies for low latency, high performance trading and exchanges](http://www.flaggmgmt.com/hpc/ppt/session-9_patrickgreene.pdf)
+- [HP Gen8 technologies for low-latency, high-performance trading and exchanges](http://www.flaggmgmt.com/hpc/ppt/session-9_patrickgreene.pdf)
 
 - [Optimizing Linux performance on HP Integrity Superdome X](http://www8.hp.com/h20195/v2/GetPDF.aspx/4AA5-9698ENW.pdf)
 
@@ -50,14 +48,16 @@ Tuning](https://support.hpe.com/hpsc/doc/public/display?docId=a00018313en_us) HP
 
 - [Reducing OS-Jitter, (Frame Latency, Latency, Stutter)](http://www.tomshardware.com/faq/id-2477508/reducing-jitter-frame-latency-latency-stutter.html)
 
-### lenovo
+### Lenovo
 - [Linux Performance and Tuning Guidelines](https://lenovopress.com/redp4285)
     - [中文版](https://www.gitbook.com/book/lihz1990/transoflptg/details)
 
 
 ## Tuning Guides from Intel and AMD
 
-Few years ago, Intel Xeon CPU was the only choice for a low latency system. It provides enough cores, CPU frequency, cache capacity, etc. Overclocked dual 2600 series CPU was the mainstream solution. Some scenarios would choose a single 1600 series CPU for higher frequency. Xeon CPU has a problem. They only could be overclocked via the base clock. That means only 1 digit percentage of frequency increment. Core i5/i7 series CPU could provide a high overclocked ratio. But the core number was a problem until core i9 released. A top core i9 CPU like i9-7980XE has 18 cores with 4.2 GHz turbo frequency. Some vendors can make all cores running at 4.6+ GHz. A single socket solution removes the latency between CPUs. Servers based on i9 is a mainstream solution now. The same thing happened with AMD. AMD's EPYC CPU is another choice now.
+A few years ago, Intel Xeon CPUs were the only choice for low-latency systems, offering sufficient cores, CPU frequency, and cache capacity. Overclocked dual 2600-series CPUs were the mainstream solution, while some scenarios favored a single 1600-series CPU for higher frequency.
+
+However, Xeon CPUs could only be overclocked via the base clock, limiting frequency gains to single-digit percentages. Core i5/i7 series CPUs offered higher overclocking ratios, but core counts were limited until Core i9 was released. A top Core i9 CPU like the i9-7980XE features 18 cores with 4.2 GHz turbo frequency, and some vendors can achieve 4.6+ GHz on all cores. Single-socket solutions eliminate inter-CPU latency, making i9-based servers a mainstream choice today. AMD's EPYC CPUs now offer another competitive option.
 
 ### Intel
 - [Optimizing Computer Applications for Latency: configuring the hardware](https://software.intel.com/en-us/articles/optimizing-computer-applications-for-latency-part-1-configuring-the-hardware)
@@ -73,7 +73,7 @@ Few years ago, Intel Xeon CPU was the only choice for a low latency system. It p
 ## Network Tuning Guides
 
 ### Solarflare
-- [Solarflare Server Adapter User Guide](https://support.solarflare.com/index.php/component/cognidox/?view=categories&id=1945) This user guide contains a chapter *Performance Tuning on Linux* which 
+- [Solarflare Server Adapter User Guide](https://support.solarflare.com/index.php/component/cognidox/?view=categories&id=1945) This user guide contains a chapter on *Performance Tuning on Linux* that covers optimization best practices.
 
 
 ### Mellanox
@@ -124,9 +124,9 @@ Few years ago, Intel Xeon CPU was the only choice for a low latency system. It p
 
 ## Solarflare
 - [OpenOnload Google Talk](http://www.openonload.org/openonload-google-talk.pdf)
-Compared different accelerate technology
-approach that Solarflare used in OpenOnload
-compared latency, bandwidth by using openonload and kernel
+  - Compares different acceleration technologies
+  - Explains the approach Solarflare used in OpenOnload
+  - Benchmarks latency and bandwidth using OpenOnload vs. kernel
 
 - [ASICs argued with FPGAs](https://www.hotchips.org/wp-content/uploads/hc_archives/hc24/HC24-2-Fabric/HC24.28.220-FPGA-ASICs-Riddoch-Solarflare.pdf)
 
@@ -186,14 +186,14 @@ compared latency, bandwidth by using openonload and kernel
   
 - [HP-timetest](mailto:low.latency@hp.com)
   I don't get this tool now. Need help.
-- [Google Group: Mechanical-Sympathy]() 
+- [Google Group: Mechanical-Sympathy](https://groups.google.com/g/mechanical-sympathy)
     - [A Toolkit to Measure Basic System Performance & OS Jitter](https://groups.google.com/d/msg/mechanical-sympathy/GuYJZIifrZE/SbF5dQs8dR0J)
     - [Systemic to reduce Linux OS jitter](https://groups.google.com/forum/#!topic/mechanical-sympathy/DWlziVmyW-w)
 
 
 
-## Unsort
-These resources will be moved to right topics later.
+## Additional Resources
+Miscellaneous resources that may be reorganized into specific topics later.
 - [Performance Analysis](https://wiki.mikejung.biz/Performance_Analysis)
 - [A Low-Latency Solution for High Frequecy Trading From IBM and Solarflare](http://www.moderntech.com.hk/sites/default/files/whitepaper/V10_A%20Low-Latency_Solution_for_High-Frequency_Trading_from_IBM_and_Solarflare_0.pdf)
 It's a very old solution that looks like a system has not been tuned well.
@@ -236,17 +236,13 @@ It's a very old solution that looks like a system has not been tuned well.
     - [Reducing system jitters part 2](http://epickrram.blogspot.co.uk/2015/11/reducing-system-jitter-part-2.html)
 
 
-## Report, Whitepaper
+## Reports & Whitepapers
 
-- [Tolly Test Report:Mellanox Spectrum vs. Broadcom StrataXGS Tomahawk 25GbE & 100GbE Performance Evaluation](http://www.mellanox.com/related-docs/products/tolly-report-performance-evaluation-2016-march.pdf)
-- [The Next Frontiers for Low Latency Programmers](http://www.mellanox.com/blog/2016/07/the-next-frontiers-for-low-latency-programmers/)
-- [Webinar from Mellanox: The latest Trend of Low Latency Programming](http://www.mellanox.com/webinars/2016/trend-low-latency/MLNX-LowLatencyWebinar-072816.mp4)
-- [Verbs Programming, Raw Ethernet](https://community.mellanox.com/docs/DOC-2517) 
+- [Tolly Test Report: Mellanox Spectrum vs. Broadcom StrataXGS Tomahawk 25GbE & 100GbE Performance Evaluation](http://www.mellanox.com/related-docs/products/tolly-report-performance-evaluation-2016-march.pdf)
+- [The Next Frontiers for Low-Latency Programmers](http://www.mellanox.com/blog/2016/07/the-next-frontiers-for-low-latency-programmers/)
+- [Webinar from Mellanox: The Latest Trends in Low-Latency Programming](http://www.mellanox.com/webinars/2016/trend-low-latency/MLNX-LowLatencyWebinar-072816.mp4)
+- [Verbs Programming: Raw Ethernet](https://community.mellanox.com/docs/DOC-2517)
 - [Low Latency Optimization](https://community.dev.hpe.com/t5/tkb/articleprintpage/tkb-id/bigdata_wiki_vertica/article-id/73)
-- [Tolly Test Report:Mellanox Spectrum vs. Broadcom StrataXGS Tomahawk 25GbE & 100GbE Performance Evaluation](http://www.mellanox.com/related-docs/products/tolly-report-performance-evaluation-2016-march.pdf)
-- [The Next Frontiers for Low Latency Programmers](http://www.mellanox.com/blog/2016/07/the-next-frontiers-for-low-latency-programmers/)
-- [Webinar from Mellanox: The latest Trend of Low Latency Programming](http://www.mellanox.com/webinars/2016/trend-low-latency/MLNX-LowLatencyWebinar-072816.mp4)
-- [Verbs Programming, Raw Ethernet](https://community.mellanox.com/docs/DOC-2517) 
 
 ## FPGA
 
@@ -278,8 +274,8 @@ It's a very old solution that looks like a system has not been tuned well.
 The choices are not so many for low latency system.
 
 ### Java
-- [Zing. A JVM solution](https://www.azul.com) Zing is a JVM solution for performance critical usage.
-- [Ultra Low Latency Trading Systems: A blog about techniques used to build www.SubMicroTrading.com](submicro.blogspot.com)
+- [Zing: A JVM Solution](https://www.azul.com) Zing is a JVM solution for performance-critical applications.
+- [Ultra Low-Latency Trading Systems](https://submicro.blogspot.com) A blog about techniques used to build SubMicroTrading.com.
 
 ### C++
 - [CppCon 2017: Fedor Pikus “C++ atomics, from basic to advanced. What do they really do?”](https://www.youtube.com/watch?v=ZQFzMfHIxng)
