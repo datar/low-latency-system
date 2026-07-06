@@ -1,45 +1,333 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
+<html lang="{{ page.lang | default: 'en' }}">
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2">
-    <meta name="author" content="Xing Chen">
-    <link rel="index" title="Xing Chen" href="/">
-    <title>{{ page.title }}</title>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <style type="text/css">
-      body {
-        margin:40px auto;
-        max-width: 650px;
-        line-height:1.5;
-        font-size:18px;
-        color:rgb(44, 44, 44);
-        padding:0 10px;
-        font-family: 'Open Sans', 'Monaco', 'Helvetica', 'Arial', sans-serif;
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Xing Chen">
+  <meta name="description" content="{{ page.description | default: 'A curated, up-to-date collection of resources for building low-latency financial trading systems.' }}">
+  <title>{% if page.url == '/' %}Low Latency System — resources for low-latency trading systems{% elsif page.url == '/zh/' %}低延迟系统 — 低延迟交易系统资源合集{% else %}{{ page.title }} · Low Latency System{% endif %}</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  <style>
+    :root {
+      --bg: #fcfcfd;
+      --bg-card: #ffffff;
+      --text: #1a2233;
+      --text-muted: #5b6578;
+      --accent: #0b66c3;
+      --accent-soft: #e8f1fb;
+      --border: #e3e7ee;
+      --code-bg: #f3f5f9;
+      --badge-summary-bg: #e8f6ee;
+      --badge-summary-fg: #13794a;
+      --shadow: 0 1px 3px rgba(16, 24, 40, .07);
+    }
+    html[data-theme="dark"] {
+      --bg: #0f141c;
+      --bg-card: #161d29;
+      --text: #dde3ee;
+      --text-muted: #94a0b5;
+      --accent: #63a9ec;
+      --accent-soft: #17273a;
+      --border: #26303f;
+      --code-bg: #1b2432;
+      --badge-summary-bg: #12301f;
+      --badge-summary-fg: #58c98b;
+      --shadow: 0 1px 3px rgba(0, 0, 0, .4);
+    }
+    @media (prefers-color-scheme: dark) {
+      html:not([data-theme]) {
+        --bg: #0f141c;
+        --bg-card: #161d29;
+        --text: #dde3ee;
+        --text-muted: #94a0b5;
+        --accent: #63a9ec;
+        --accent-soft: #17273a;
+        --border: #26303f;
+        --code-bg: #1b2432;
+        --badge-summary-bg: #12301f;
+        --badge-summary-fg: #58c98b;
+        --shadow: 0 1px 3px rgba(0, 0, 0, .4);
       }
-      h1,h2,h3 { line-height:1.2; }
-    </style>
-  </head>
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+                   "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  <body>
+    /* ---------- header ---------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .site-header .inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: .6rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 1.02rem;
+      text-decoration: none;
+      color: var(--text);
+      letter-spacing: -.01em;
+      white-space: nowrap;
+    }
+    .brand .bolt { color: var(--accent); }
+    nav.site-nav {
+      display: flex;
+      gap: .15rem;
+      flex-wrap: wrap;
+      margin-left: auto;
+      align-items: center;
+    }
+    nav.site-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: .92rem;
+      padding: .3rem .6rem;
+      border-radius: 7px;
+    }
+    nav.site-nav a:hover { color: var(--accent); background: var(--accent-soft); }
+    nav.site-nav a.active { color: var(--accent); font-weight: 600; }
+    .lang-switch {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: .18rem .7rem !important;
+      font-weight: 600;
+      color: var(--accent) !important;
+      margin-left: .35rem;
+    }
+    #theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: .9rem;
+      padding: .18rem .55rem;
+      line-height: 1.4;
+      margin-left: .25rem;
+    }
+    #theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
 
-    <!-- HEADER -->
+    /* ---------- content ---------- */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+    h1 { font-size: 2rem; line-height: 1.25; letter-spacing: -.02em; margin: .5rem 0 1rem; }
+    h2 {
+      font-size: 1.45rem;
+      letter-spacing: -.01em;
+      margin-top: 2.6rem;
+      padding-bottom: .35rem;
+      border-bottom: 1px solid var(--border);
+    }
+    h3 { font-size: 1.15rem; margin-top: 1.9rem; }
+    h2, h3 { scroll-margin-top: 4.5rem; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    p, li { color: var(--text); }
+    li { margin: .45rem 0; }
+    ul { padding-left: 1.35rem; }
+    blockquote {
+      margin: 1rem 0;
+      padding: .6rem 1rem;
+      border-left: 3px solid var(--accent);
+      background: var(--accent-soft);
+      border-radius: 0 8px 8px 0;
+      color: var(--text);
+    }
+    blockquote p { margin: .3rem 0; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .88em;
+      background: var(--code-bg);
+      padding: .12em .38em;
+      border-radius: 5px;
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .9rem 1.1rem;
+      overflow-x: auto;
+    }
+    pre code { background: none; padding: 0; }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1.2rem 0;
+      font-size: .93rem;
+      display: block;
+      overflow-x: auto;
+    }
+    th, td { border: 1px solid var(--border); padding: .5rem .75rem; text-align: left; }
+    th { background: var(--code-bg); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+    img { max-width: 100%; }
 
-    <!-- MAIN CONTENT -->
+    /* ---------- badges ---------- */
+    a.sum {
+      display: inline-block;
+      font-size: .74rem;
+      font-weight: 600;
+      background: var(--badge-summary-bg);
+      color: var(--badge-summary-fg);
+      border-radius: 999px;
+      padding: .05rem .55rem;
+      vertical-align: .12em;
+      margin-left: .25rem;
+      white-space: nowrap;
+    }
+    a.sum:hover { text-decoration: none; filter: brightness(1.08); }
+    .lvl {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: .03rem .5rem;
+      vertical-align: .12em;
+      margin-left: .25rem;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .lvl-b { color: #13794a; border-color: #13794a55; }
+    .lvl-i { color: #b06a00; border-color: #b06a0055; }
+    .lvl-a { color: #b32430; border-color: #b3243055; }
+    html[data-theme="dark"] .lvl-b, [data-theme="dark"] .lvl-b { color: #58c98b; }
+    html[data-theme="dark"] .lvl-i { color: #e9a23b; }
+    html[data-theme="dark"] .lvl-a { color: #ef6a75; }
+
+    /* ---------- TOC ---------- */
+    #markdown-toc, .toc-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 1rem 1rem 1rem 2.2rem;
+      font-size: .92rem;
+      margin: 1.5rem 0;
+    }
+    #markdown-toc li { margin: .2rem 0; }
+    #markdown-toc ul { padding-left: 1.1rem; }
+
+    /* ---------- footer ---------- */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: .88rem;
+    }
+    .site-footer .inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.4rem 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .site-footer a { color: var(--text-muted); text-decoration: underline; }
+    .site-footer a:hover { color: var(--accent); }
+
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      .site-header .inner { padding: .5rem .9rem; }
+      main { padding: 1.4rem .9rem 3rem; }
+    }
+  </style>
+  <script>
+    (function () {
+      var t = localStorage.getItem('theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+
+<body>
+  {% if page.lang == 'zh' %}
+    {% assign nav_home = '资源列表' %}
+    {% assign nav_guide = '完整指南' %}
+    {% assign nav_research = '研究记录' %}
+    {% assign home_url = '/zh/' %}
+    {% assign guide_url = '/zh/guide/' %}
+    {% assign research_url = '/research/' %}
+    {% assign lang_label = 'English' %}
+  {% else %}
+    {% assign nav_home = 'References' %}
+    {% assign nav_guide = 'The Guide' %}
+    {% assign nav_research = 'Research Notes' %}
+    {% assign home_url = '/' %}
+    {% assign guide_url = '/guide/' %}
+    {% assign research_url = '/research/' %}
+    {% assign lang_label = '中文' %}
+  {% endif %}
+
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="{{ home_url }}"><span class="bolt">⚡</span> Low Latency System</a>
+      <nav class="site-nav">
+        <a href="{{ home_url }}" {% if page.nav == 'home' %}class="active"{% endif %}>{{ nav_home }}</a>
+        <a href="{{ guide_url }}" {% if page.nav == 'guide' %}class="active"{% endif %}>{{ nav_guide }}</a>
+        <a href="{{ research_url }}" {% if page.nav == 'research' %}class="active"{% endif %}>{{ nav_research }}</a>
+        <a href="https://github.com/datar/low-latency-system">GitHub</a>
+        <a class="lang-switch" href="{{ page.translation | default: '/' }}" title="Switch language">{{ lang_label }}</a>
+        <button id="theme-toggle" title="Toggle dark mode">◐</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
     {{ content }}
-    {% include ads.html %}
-    <!-- FOOTER  -->
-    {% if site.google_analytics %}
-      <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', '{{ site.google_analytics }}', 'auto');
-        ga('send', 'pageview');
-      </script>
-    {% endif %}
-  </body>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <span>© {{ 'now' | date: '%Y' }} Xing Chen · <a href="https://github.com/datar/low-latency-system/blob/master/LICENSE">License</a></span>
+      <span><a href="https://github.com/datar/low-latency-system/issues">Suggest a resource</a> · <a href="https://www.linkedin.com/in/masterchen/">LinkedIn</a></span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('theme-toggle').addEventListener('click', function () {
+      var root = document.documentElement;
+      var cur = root.getAttribute('data-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var next = cur === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  </script>
+  {% include ads.html %}
+  {% if site.google_analytics %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site.google_analytics }}');
+  </script>
+  {% endif %}
+</body>
 </html>

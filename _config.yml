@@ -1,8 +1,15 @@
-google_analytics: UA-75987842-3
+title: "Low Latency System"
+description: "A curated, up-to-date collection of resources for building low-latency financial trading systems — from hardware and Linux tuning to kernel bypass, FPGAs, and lock-free code."
+url: "https://lowlatencysystem.com"
+
+# Google Analytics: the old Universal Analytics property (UA-75987842-3) stopped
+# processing data in July 2023. Create a GA4 property and put its "G-XXXXXXXXXX"
+# measurement ID here to re-enable analytics.
+# google_analytics: G-XXXXXXXXXX
+
 defaults:
-  -
-    scope:
-      path: "index.md"
+  - scope:
+      path: ""
     values:
-      title: "Low Latency System"
       layout: "default"
+      lang: "en"
