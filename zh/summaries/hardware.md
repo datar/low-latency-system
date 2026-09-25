@@ -15,9 +15,9 @@ nav: home
 
 ## AMD EPYC 9005 BIOS 与工作负载调优指南（Pub 58467） {#amd-9005-tuning}
 
-**来源：** [docs.amd.com](https://docs.amd.com/v/u/en-US/58467_amd-epyc-9005-tg-bios-and-workload) · <span class="lvl lvl-a">高级</span> · rev 2.2，2026 年 6 月
+**来源：** [docs.amd.com](https://docs.amd.com/v/u/en-US/58467_amd-epyc-9005-tg-bios-and-workload) · <span class="lvl lvl-a">高级</span> · 2024 年发布，2025 年修订
 
-AMD 针对第五代 EPYC "Turin"（9005 系列）服务器的官方调优指南——接替了本站过去链接的、已下线的 2018 年 developer.amd.com 调优 PDF。它逐项讲解 SP5 平台上每一个与延迟相关的 BIOS 选项：性能/功耗确定性模式、C-state 控制、SMT、NUMA-per-socket（NPS）模式、Infinity Fabric 与内存时钟配置。按工作负载给出的推荐设置表，可直接映射到基于 EPYC 9575F 等芯片的低延迟交易配置。这是当前 AMD 服务器调优的权威文档。
+AMD 针对第五代 EPYC "Turin"（9005 系列）服务器的官方调优指南——接替了本站过去链接的、已下线的 2018 年 developer.amd.com 调优 PDF。它逐项讲解 SP5 平台上每一个与延迟相关的 BIOS 选项：性能/功耗确定性模式、C-state 控制、SMT、NUMA-per-socket（NPS）模式、Infinity Fabric 与内存时钟配置。按工作负载（低延迟、HPC 等）给出的推荐设置表，可直接转化为基于 EPYC 9575F 等芯片的交易服务器 BIOS 配置。这是当前 AMD 服务器调优的权威文档。
 
 ## Dell PowerEdge 16G BIOS 调优指南 — 低延迟 {#dell-16g}
 
@@ -27,7 +27,7 @@ Dell 对其经典的 2010 年白皮书《Configuring Low-Latency Environments on
 
 ## 为低延迟应用配置 HPE ProLiant 服务器 {#hpe-low-latency}
 
-**来源：** [hpe.com/psnow](https://www.hpe.com/psnow/doc/c01804533) · <span class="lvl lvl-i">进阶</span> · 更新至 ProLiant Gen11
+**来源：** [hpe.com/psnow](https://www.hpe.com/psnow/doc/c01804533) · <span class="lvl lvl-i">进阶</span> · 更新至 ProLiant Gen11（尚无 Gen12 版本；Gen12 服务器内置了遵循本白皮书的"Low Latency"工作负载配置）
 
 HPE 长期维护的低延迟白皮书——与本站自 2018 年起链接的是同一个文档 ID，在 HPE 关闭旧支持门户后迁移到了新 URL。内容涵盖 BIOS 工作负载配置文件、禁用电源管理 SMI（HPE 机器上经典的数微秒级抖动来源）、抖动平滑选项，以及操作系统层面的建议。需要注意，HPE 的超频"Trade and Match" Apollo 服务器已停产；这一细分市场如今由精品厂商填补，但调优标准 ProLiant 服务器仍以本指南为准。
 
@@ -39,7 +39,7 @@ Intel 官方技术文章，记录 Xeon 6（Granite Rapids）的性能与功耗�
 
 ## Phoronix — Xeon 6 Latency Optimized Mode 基准测试 {#phoronix-lom}
 
-**来源：** [phoronix.com](https://www.phoronix.com/review/intel-latency-optimized-mode) · <span class="lvl lvl-i">进阶</span> · 2025 年初
+**来源：** [phoronix.com](https://www.phoronix.com/review/intel-latency-optimized-mode) · <span class="lvl lvl-i">进阶</span> · 2025 年 11 月
 
 对 Intel Latency Optimized Mode 的独立基准测试研究，量化了低延迟从业者过去通过手动锁定 uncore 频率来近似实现的这项设置：在广泛的测试套件中取得约 17% 的几何平均性能提升，功耗代价可以接受。文章还解释了该特性与 ELC 策略及 RAPL/TDP 限制的相互作用。在选型或调优 Xeon 6 交易服务器时的必读资料。
 

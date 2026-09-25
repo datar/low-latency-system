@@ -14,9 +14,9 @@ nav: home
 
 ## AMD EPYC 9005 BIOS & Workload Tuning Guide (Pub 58467) {#amd-9005-tuning}
 
-**Source:** [docs.amd.com](https://docs.amd.com/v/u/en-US/58467_amd-epyc-9005-tg-bios-and-workload) · <span class="lvl lvl-a">advanced</span> · rev 2.2, June 2026
+**Source:** [docs.amd.com](https://docs.amd.com/v/u/en-US/58467_amd-epyc-9005-tg-bios-and-workload) · <span class="lvl lvl-a">advanced</span> · 2024, revised 2025
 
-AMD's official tuning guide for 5th-gen EPYC "Turin" (9005-series) servers — the successor to the retired 2018 developer.amd.com tuning PDF this site used to link. It walks through every latency-relevant BIOS knob on the SP5 platform: power/performance determinism, C-state control, SMT, NUMA-per-socket (NPS) modes, Infinity Fabric and memory-clock configuration. Workload-specific recommendation tables map settings directly to a low-latency trading build on chips like the EPYC 9575F. The current canonical AMD server tuning document.
+AMD's official tuning guide for 5th-gen EPYC "Turin" (9005-series) servers — the successor to the retired 2018 developer.amd.com tuning PDF this site used to link. It walks through every latency-relevant BIOS knob on the SP5 platform: power/performance determinism, C-state control, SMT, NUMA-per-socket (NPS) modes, Infinity Fabric and memory-clock configuration. Its workload-specific recommendation tables (low-latency, HPC and others) translate directly into BIOS settings for a trading build on chips like the EPYC 9575F. The current canonical AMD server tuning document.
 
 ## Dell PowerEdge 16G BIOS Tuning Guide — Low Latency {#dell-16g}
 
@@ -26,7 +26,7 @@ Dell's modern replacement for its classic 2010 "Configuring Low-Latency Environm
 
 ## Configuring HPE ProLiant Servers for Low-Latency Applications {#hpe-low-latency}
 
-**Source:** [hpe.com/psnow](https://www.hpe.com/psnow/doc/c01804533) · <span class="lvl lvl-i">intermediate</span> · updated through ProLiant Gen11
+**Source:** [hpe.com/psnow](https://www.hpe.com/psnow/doc/c01804533) · <span class="lvl lvl-i">intermediate</span> · updated through ProLiant Gen11 (no Gen12 edition yet; Gen12 servers expose a built-in "Low Latency" workload profile that follows this paper)
 
 HPE's long-running low-latency whitepaper — the same document ID this site linked since 2018, now living at a new URL after HPE retired its old support portal. It covers BIOS workload profiles, disabling power-management SMIs (a classic source of multi-microsecond jitter on HPE boxes), jitter-smoothing options, and OS-level recommendations. Note that HPE's overclocked "Trade and Match" Apollo servers are discontinued; boutique vendors now fill that niche, but this guide is still the reference for tuning standard ProLiants.
 
@@ -38,7 +38,7 @@ Intel's own technical article documenting Xeon 6 (Granite Rapids) performance an
 
 ## Phoronix — Xeon 6 Latency Optimized Mode Benchmarks {#phoronix-lom}
 
-**Source:** [phoronix.com](https://www.phoronix.com/review/intel-latency-optimized-mode) · <span class="lvl lvl-i">intermediate</span> · early 2025
+**Source:** [phoronix.com](https://www.phoronix.com/review/intel-latency-optimized-mode) · <span class="lvl lvl-i">intermediate</span> · November 2025
 
 An independent benchmark study of Intel's Latency Optimized Mode, quantifying a setting low-latency practitioners previously approximated by manually pinning uncore frequency: roughly 17% geometric-mean performance improvement across a broad suite, with acceptable power cost. Also explains how the feature interacts with ELC policies and RAPL/TDP limits. Essential reading when specifying or tuning Xeon 6 trading servers.
 

@@ -35,7 +35,7 @@ nav: home
 
 **来源：** [orthogone.com](https://orthogone.com/industries/high-frequency-trading-finance/) · <span class="lvl lvl-i">进阶</span> · 2025 年
 
-一家厂商对完整 FPGA 交易技术栈的当前视角：超低延迟 IP 核，包括线到线延迟 17.1 ns 的以太网 MAC/PCS 和 6.2 ns 的 TX TCP/UDP 卸载引擎，外加内核旁路（kernel-bypass）PCIe DMA。文章展示了现代 CPU+FPGA 混合系统如何划分职责——数据路径放在 FPGA、策略迭代放在软件——并给出具体数字，例如在超频的 Blackcore 服务器上 FPGA 到主机的往返为 585 ns。它代表了 Exegy/AMD（后者于 2022 年收购了 Enyx）之外的 2025 年厂商生态。
+一家厂商对完整 FPGA 交易技术栈的当前视角：超低延迟 IP 核，包括线到线延迟 17.1 ns 的以太网 MAC/PCS 和 6.2 ns 的 TX TCP/UDP 卸载引擎，外加内核旁路（kernel-bypass）PCIe DMA。文章展示了现代 CPU+FPGA 混合系统如何划分职责——数据路径放在 FPGA、策略迭代放在软件——并给出具体数字，例如在超频的 Blackcore 服务器上 FPGA 到主机的往返为 585 ns。它代表了 Exegy（2022 年收购 Enyx，2026 年 1 月又收购 NovaSparks）和 AMD 之外的 2025 年厂商生态。
 
 ## 用 FPGA 对接 Nasdaq ITCH 与 OUCH 协议（Design Gateway） {#dgway-itch-ouch}
 

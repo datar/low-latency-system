@@ -15,13 +15,13 @@ nav: home
 
 ## 针对低延迟运行优化 RHEL 实时系统（Optimizing RHEL for Real Time for Low Latency Operation，RHEL 9/10） {#rhel-rt}
 
-**来源：** [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux_for_real_time/9/html-single/optimizing_rhel_9_for_real_time_for_low_latency_operation/index) · <span class="lvl lvl-i">进阶</span> · 持续更新（2022–2026）
+**来源：** [docs.redhat.com（RHEL 10）](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux_for_real_time/10/html-single/optimizing_rhel_for_real_time_for_low_latency_operation/index) · [RHEL 9 版本](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux_for_real_time/9/html-single/optimizing_rhel_9_for_real_time_for_low_latency_operation/index) · <span class="lvl lvl-i">进阶</span> · 持续更新（2022–2026）
 
 Red Hat 当前关于将 RHEL 系统调校至稳定、可预测低延迟的权威指南——本站多年链接的旧版 RHEL 7 低延迟调优文章的直接继任者。内容涵盖 TuneD 实时配置文件、调度策略与优先级、CPU 隔离与中断（IRQ）绑定、内存锁定与大页（hugepages）、规避 TCP 协议栈和日志写入引入的延迟，以及使用 `hwlatdetect` 和 `rteval` 进行硬件/固件延迟测试。自 RHEL 9 起，实时内核（`kernel-rt`）已随标准 RHEL 一同提供——无需单独购买产品。对于在 RHEL 9/10 上部署交易系统的人来说，这是必读的基础资料。
 
-## 监控与管理系统状态和性能（Monitoring and Managing System Status and Performance，RHEL 9） {#rhel-perf}
+## 监控与管理系统状态和性能（Monitoring and Managing System Status and Performance，RHEL 9/10） {#rhel-perf}
 
-**来源：** [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/monitoring_and_managing_system_status_and_performance/index) · <span class="lvl lvl-b">入门</span> · 持续更新
+**来源：** [docs.redhat.com（RHEL 10）](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/monitoring_and_managing_system_status_and_performance/index) · [RHEL 9 版本](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/monitoring_and_managing_system_status_and_performance/index) · <span class="lvl lvl-b">入门</span> · 持续更新
 
 已退役的 RHEL 7《Performance Tuning Guide》的现代替代品。它介绍了在当前 RHEL 上进行系统性能工作的概念与工具：TuneD 配置文件、PCP/perf 监控，以及网络、内存、磁盘和 CPU 调优各章节。这些概念同样适用于 CentOS Stream、Rocky、Alma，以及（工具略有不同的）其他发行版。如果你是 Linux 性能调优新手，请先读这一篇；之后再深入上面的实时系统指南。
 
@@ -35,7 +35,7 @@ Red Hat 当前关于将 RHEL 系统调校至稳定、可预测低延迟的权威
 
 **来源：** [lwn.net](https://lwn.net/Articles/989212/) · <span class="lvl lvl-i">进阶</span> · 2024 年 9 月
 
-LWN 对 PREEMPT_RT 最终合入主线 Linux 6.12 的权威报道，为长达约二十年的树外实时补丁画上句号。文章解释了实时抢占的机制（可睡眠自旋锁、线程化中断）、为何 `printk` 重写是最后一个障碍，以及合入主线的实际意义：任何原生 6.12+ 内核在 x86/ARM64/RISC-V 上都可以启用完整 RT 抢占编译，驱动在树内维护、无需再打补丁。这是每一位交易系统构建者在 2026 年选择内核时都应了解的背景。
+LWN 对 PREEMPT_RT 最终合入主线 Linux 6.12 的权威报道，为长达约二十年的树外实时补丁画上句号。文章解释了实时抢占的机制（可睡眠自旋锁、线程化中断）、为何 `printk` 重写是最后一个障碍，以及合入主线的实际意义：任何原生 6.12+ 内核在 x86/ARM64/RISC-V 上（之后 6.13 加入 LoongArch，7.1 加入 32 位 ARM）都可以启用完整 RT 抢占编译，驱动在树内维护、无需再打补丁。这是每一位交易系统构建者在 2026 年选择内核时都应了解的背景。
 
 ## SUSE Labs — CPU 隔离系列（Frederic Weisbecker） {#suse-cpu-isolation}
 
@@ -83,7 +83,7 @@ Linux 性能可观测性的核心参考枢纽：`perf`、ftrace 与 eBPF/bpftrac
 
 **来源：** [PDF](https://www.redhat.com/files/summit/session-assets/2018/Performance-analysis-and-tuning-of-Red-Hat-Enterprise-Linux-Part-1.pdf) · <span class="lvl lvl-i">进阶</span> · 2018 年（历史资料）
 
-Red Hat 长期在 Summit 上开讲的性能分析与调优系列演讲的幻灯片。原版视频已经下线，但幻灯片留存了下来，依然展示了 Red Hat 性能工程师的思考方式：先测量，以 tuned 配置文件为基线，再逐一攻克 NUMA 布局、大页（hugepages）和中断（IRQ）安置。作为历史参考保留；现行资料请使用上面的 RHEL 9 文档。
+Red Hat 长期在 Summit 上开讲的性能分析与调优系列演讲的幻灯片。原版视频已经下线，但幻灯片留存了下来，依然展示了 Red Hat 性能工程师的思考方式：先测量，以 tuned 配置文件为基线，再逐一攻克 NUMA 布局、大页（hugepages）和中断（IRQ）安置。作为历史参考保留；现行资料请使用上面的 RHEL 10（或 RHEL 9）文档。
 
 ## RHEL 7 低延迟性能调优（Low Latency Performance Tuning for RHEL 7，历史 PDF） {#rhel7-legacy}
 

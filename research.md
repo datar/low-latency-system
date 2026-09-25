@@ -28,15 +28,15 @@ This site was originally curated around 2016–2018. In July 2026 the entire col
 - **Mellanox → NVIDIA (2020).** All mellanox.com documentation links died; docs moved to NVIDIA portals. The VMA kernel-bypass library was superseded by **XLIO**; Rivermax/NEIO FastSockets is the 2025 finance offering.
 - **Exablaze → Cisco (2019), then exit.** ExaNIC became Cisco Nexus SmartNIC (maintenance mode); Cisco end-of-saled the entire ex-Exablaze ULL switch line in April 2023, leaving **Arista 7130** (ex-Metamako) as the de facto layer-1/ULL switching platform.
 - **HPE retired its overclocked "Trade and Match" servers**; boutique vendors (Blackcore, Hypertec CIARA) now own the overclocked-server niche.
-- Smaller moves: Real Logic (Aeron) acquired by Adaptive (2022), repo moved to `aeron-io`; Enyx acquired by Exegy (2022); Corvil acquired by Pico (2019); STAC acquired by ISG (2020).
+- Smaller moves: Real Logic (Aeron) acquired by Adaptive (2022), repo moved to `aeron-io`; Enyx acquired by Exegy (2022), which also bought NovaSparks (Jan 2026); Corvil acquired by Pico (2019); STAC acquired by n2 Group, parent of NAG (July 2024).
 
 ### Technology state of the art (mid-2026)
 
 - **Tick-to-trade tiers:** tuned software with kernel bypass ~1–2 µs; FPGA tens–hundreds of ns, with the **STAC-T0 record at 13.9 ns** (Exegy + AMD Alveo UL3524, 2024); ASICs at the deterministic frontier.
 - **PREEMPT_RT merged into mainline Linux 6.12 (Nov 2024)** after ~20 years out-of-tree; `kernel-rt` is included in standard RHEL since 9.0. Modern isolation practice is `nohz_full` + `rcu_nocbs` + IRQ steering (bare `isolcpus` is insufficient); tuned's `cpu-partitioning` profile automates it; `rtla` (kernel 5.17+) is the new jitter-diagnosis tool; observability is eBPF-first.
 - **CPUs:** AMD EPYC 9005 F-series (9575F) and X3D parts with 3D V-Cache; Intel Xeon 6 with Latency Optimized Mode (+17% measured) and SST-BF guaranteed-fast cores; single-socket settled as the latency architecture; core-to-core latency is now a first-class selection metric.
-- **Time sync:** IEEE 1588-2019 (PTP v2.1) is the baseline; White Rabbit became its High Accuracy profile and is offered by Deutsche Börse in co-location; Meta open-sourced its PTP stack and the OCP Time Card; MiFID II RTS 25 (100 µs / 1 µs granularity) still drives requirements, with its successor RTS in draft.
-- **Languages:** C++ canon refreshed (Optiver's David Gross: Meeting C++ 2022, CppCon 2024 keynote); Rust reached effective latency parity with a maturing ecosystem (Databento, 2025); Java consolidated on Disruptor/Chronicle/Aeron with pauseless GC now free via generational ZGC (JDK 21+).
+- **Time sync:** IEEE 1588-2019 (PTP v2.1) is the baseline; White Rabbit became its High Accuracy profile and is offered by Deutsche Börse in co-location; Meta open-sourced its PTP stack and the OCP Time Card; in the EU, MiFID II RTS 25 was replaced from 2 March 2026 by Delegated Regulation (EU) 2025/1155 under MiFIR (100 µs limit kept, finest granularity tightened to 0.1 µs); the UK keeps its onshored RTS 25.
+- **Languages:** C++ canon refreshed (Optiver's David Gross: Meeting C++ 2022, CppCon 2024 keynote); Rust can match C++ latency with a maturing ecosystem, though hot paths often stay in C++ for tooling reasons (Databento, 2025); Java consolidated on Disruptor/Chronicle/Aeron with pauseless GC now free via generational ZGC (JDK 21+, ZGC's only mode since JDK 24); C++26 (finalized March 2026) adds standard hazard pointers and RCU.
 
 ### Link audit results
 
@@ -68,3 +68,22 @@ Some legacy entries were removed rather than replaced, with reasons recorded in 
 ## Methodology notes {#methodology}
 
 Research was performed with parallel web-research agents (one per area), each instructed to verify every recommended URL by fetching it and to return link status, dated state-of-the-art facts, and candidate references with summaries and difficulty levels. Their raw findings were then cross-checked where areas overlapped (e.g. Rigtorp's guide, STAC records and core-to-core-latency tools surfaced independently in multiple areas — a good sign of canonicity) and edited into the pages you see. Facts carry dates in the text so future readers can judge staleness; this page itself should be re-verified around **mid-2027**.
+
+## September 2026 re-check {#sept-2026}
+
+Two months after the rebuild, every section was fact-checked again with parallel research agents, one per area. This time direct page fetches were mostly blocked, so claims were verified through search indexes, vendor announcements, and the GitHub/Git mirrors. **No linked resource was found dead.** Several facts were wrong or had moved on, and are now corrected:
+
+| Area | What changed / was wrong | Correction |
+|---|---|---|
+| Time sync | "RTS 25's successor is in draft" was already outdated | EU RTS 25 was repealed and replaced from 2 Mar 2026 by Delegated Regulation (EU) 2025/1155 (MiFIR Art. 22c): 100 µs limit kept, finest granularity 1 µs → 0.1 µs; the UK keeps its onshored RTS 25 |
+| Industry map | "STAC acquired by ISG (2020)" was wrong | STAC was acquired by n2 Group (parent of NAG) in July 2024 |
+| Industry map | Missing event | Exegy acquired NovaSparks (Jan 2026), after Enyx (2022) |
+| Linux | Red Hat links pointed at RHEL 9 | RHEL 10 (GA May 2025) guides are now primary, RHEL 9 kept as a secondary link; PREEMPT_RT arch list updated (LoongArch 6.13, 32-bit ARM 7.1); Linux 7.0 (Apr 2026) removed `PREEMPT_NONE`/`VOLUNTARY` on major architectures; RT throughput cost stated as Red Hat's 0–30% |
+| CPUs | Roadmap moved | AMD announced Zen 6 EPYC 9006 "Venice" (July 2026; 5 GHz 9686F), shipping from Q4 2026; Intel Xeon 7 slipped to 2027. Unverifiable "rev 2.2, June 2026" dropped from the AMD tuning-guide entry; Phoronix LOM article re-dated to Nov 2025 |
+| Guide physics | "1 ms ≈ 150 km of fiber" was wrong | ~200 km one way (≈5 µs/km) |
+| Networking | FEC cost understated; XLIO version stale | FEC ~100–250 ns per hop (RS-FEC at the slow end); XLIO now 3.80 |
+| Java | "Generational ZGC default since JDK 21" was wrong | Introduced in JDK 21, default ZGC mode in JDK 23, only mode since JDK 24; Chronicle now calendar-versioned with Java 25 support; Disruptor is stable (last release 4.0.0, 2023) |
+| C++ / Rust | Missing / overstated | C++26 (finalized Mar 2026) adds `std::hazard_pointer` and `std::rcu`; Rust "parity" softened and paired with Databento's counterpoint on keeping the feed handler in C++ |
+| Summaries | Minor inaccuracies | Sutter Part II, Vyukov/Go, Gross order-book, Exablaze deal dates, Meta PTP follow-ups, `rteval` fixed |
+
+Still worth re-checking later: CppCon 2026 talk videos (not yet posted at the time of this check), the Venice F-series SKU list, and whether any new STAC-T0 record is published.

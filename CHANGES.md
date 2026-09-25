@@ -1,4 +1,18 @@
-# Changes — July 2026 Site Rebuild
+# Changes
+
+## September 2026 fact re-check
+
+A second pass over every section, two months after the rebuild. The findings and sources are summarized on the site at [/research/#sept-2026](https://lowlatencysystem.com/research/#sept-2026). All edits were mirrored in the Chinese pages.
+
+- **Timing:** MiFID II RTS 25 → Delegated Regulation (EU) 2025/1155 (applies from 2 Mar 2026; 0.1 µs finest granularity; UK unchanged). IEEE 1588 amendments/revision noted. Meta PTP follow-up articles dated correctly. Deutsche Börse's current Time Services page linked next to the archived Eurex pilot page.
+- **Linux:** Red Hat links moved to RHEL 10 (RHEL 9 kept as secondary). PREEMPT_RT architecture list, Linux 7.0 preemption-model change, and Red Hat's 0–30% RT throughput figure added.
+- **Hardware:** EPYC 9006 "Venice" and the Intel Xeon roadmap added; unverifiable AMD guide revision/date removed; Phoronix date fixed; HPE Gen12 note; boutique-server CPU list broadened; X3D cache caveat; cross-CCD latency range aligned; fiber distance per ms corrected (~200 km).
+- **Networking/FPGA:** STAC ownership fixed (n2 Group, 2024); Exegy–NovaSparks (2026) added; FEC cost 100–250 ns; XLIO 3.80 and libxlio repo; Exablaze deal dates; Rivermax benchmark context.
+- **Software:** ZGC version history corrected; Chronicle/Disruptor status; C++26 hazard pointers/RCU; Rust claim balanced with Databento's counterpoint; Sutter, Vyukov, and Gross summaries corrected.
+
+---
+
+## July 2026 Site Rebuild
 
 This file records every change made in the July 2026 update and why. The research process and findings behind these changes are on the site at [/research/](https://lowlatencysystem.com/research/) (`research.md`).
 

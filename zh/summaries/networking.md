@@ -39,7 +39,7 @@ AMD 为当前旗舰交易网卡家族发布的博文：X4522（2× 10/25/50GbE�
 
 ## NVIDIA XLIO 文档（VMA 的继任者） {#xlio}
 
-**来源：** [networking-docs.nvidia.com/xlioswum](https://networking-docs.nvidia.com/xlioswum) · <span class="lvl lvl-a">高级</span> · Rev 3.6x–3.70，2025–2026 年
+**来源：** [networking-docs.nvidia.com/xlioswum](https://networking-docs.nvidia.com/xlioswum) · <span class="lvl lvl-a">高级</span> · Rev 3.6x–3.80，2025–2026 年 · 源码：[Mellanox/libxlio](https://github.com/Mellanox/libxlio)
 
 XLIO 是 NVIDIA 的内核旁路（kernel bypass）套接字库，也是 Mellanox VMA 的指定继任者（从 VMA 9.2.2 分叉而来）。文档涵盖 `LD_PRELOAD` 使用模式、TCP/UDP 卸载路径、轮询/自旋调优，以及在 ConnectX 网卡上的套接字扩展上限。还留着 2018 年时代 VMA 调优笔记的读者都应迁移到这里；面向老部署的 VMA 旧文档仍保留在 [networking-docs.nvidia.com/vmaswum](https://networking-docs.nvidia.com/vmaswum)。
 
@@ -47,7 +47,7 @@ XLIO 是 NVIDIA 的内核旁路（kernel bypass）套接字库，也是 Mellanox
 
 **来源：** [developer.nvidia.com blog](https://developer.nvidia.com/blog/maximizing-low-latency-networking-performance-for-financial-services-with-nvidia-rivermax-and-neio-fastsocket/) · <span class="lvl lvl-i">进阶</span> · 2025 年 9 月
 
-NVIDIA 当前面向 ConnectX 交易工作负载的方案：Rivermax 内核旁路（kernel bypass）零拷贝流式传输，加上其上的 NEIO FastSockets 库。基准测试显示约 0.25 µs 的序列化延迟（宣称比标准套接字快 8 倍）和 3.35M pps 的无丢包 UDP 接收，并支持 GPUDirect 的网卡到 GPU 直达路径。有助于理解 Mellanox 血统的技术栈如今如何在行情数据工作负载上与 Onload 竞争。
+NVIDIA 当前面向 ConnectX 交易工作负载的方案：Rivermax 内核旁路（kernel bypass）零拷贝流式传输，加上其上的 NEIO FastSockets 库。基准测试（在 Windows 上使用 25GbE ConnectX-6 运行）显示约 0.25 µs 的序列化延迟（宣称比标准套接字快 8 倍）和 3.35M pps 的无丢包 UDP 接收，并支持 GPUDirect 的网卡到 GPU 直达路径。有助于理解 Mellanox 血统的技术栈如今如何在行情数据工作负载上与 Onload 竞争。
 
 ## RDMA Aware Networks Programming User Manual {#rdma-manual}
 
@@ -59,7 +59,7 @@ NVIDIA 当前面向 ConnectX 交易工作负载的方案：Rivermax 内核旁路
 
 **来源：** [arista.com](https://www.arista.com/en/products/7130-series) · <span class="lvl lvl-i">进阶</span> · 现行产品；25G 世代于 2023 年 10 月推出
 
-在 Cisco 于 2023 年 4 月对整个 Nexus 3550（原 Exablaze）交换机产品线宣布停售且无后续产品之后，Arista 的 7130 家族（来自对 Metamako 的收购）成为事实上的超低延迟交换平台。该产品页涵盖一层 crosspoint 交换机（端口到端口约 4 ns）、MetaMux（约 39 ns 的 FPGA 复用，用于面向交易所的链路）、MetaWatch（带亚纳秒级时间戳（timestamp）的分光/汇聚），以及 25G 世代（7132LB：25GbE 下 150 ns 的 L3 交换）。注意当前的前沿玩法：短链路上以关闭 FEC 的方式跑 25GbE，因为仅 FEC 一项就会增加约 100+ ns。
+在 Cisco 于 2023 年 4 月对整个 Nexus 3550（原 Exablaze）交换机产品线宣布停售且无后续产品之后，Arista 的 7130 家族（来自对 Metamako 的收购）成为事实上的超低延迟交换平台。该产品页涵盖一层 crosspoint 交换机（端口到端口约 4 ns）、MetaMux（约 39 ns 的 FPGA 复用，用于面向交易所的链路）、MetaWatch（带亚纳秒级时间戳（timestamp）的分光/汇聚），以及 25G 世代（7132LB：25GbE 下 150 ns 的 L3 交换）。注意当前的前沿玩法：短链路上以关闭 FEC 的方式跑 25GbE，因为仅 FEC 一项每跳就会增加约 100–250 ns（RS-FEC 最高约 250 ns，见 [Arista](https://blogs.arista.com/blog/ultra-low-latency-25g-ethernet)）。
 
 ## 测量一台 4 ns 交换机的延迟（Arista） {#arista-4ns}
 
@@ -71,7 +71,7 @@ NVIDIA 当前面向 ConnectX 交易工作负载的方案：Rivermax 内核旁路
 
 **来源：** [datasheet](https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/nexus-smartnic/datasheet-c78-743827.html) · [exanic-software on GitHub](https://github.com/cisco/exanic-software) · <span class="lvl lvl-i">进阶</span> · 维护模式
 
-Cisco 于 2019 年 12 月收购 Exablaze，并将 ExaNIC 产品线更名为 Nexus SmartNIC（K3P-S 即 ExaNIC X25，K3P-Q 即 X100），官方公布的软件触发到响应延迟低至 568 ns，RX 时间戳（timestamp）精度 4 ns。`libexanic` 驱动栈仍在 GitHub 上开源。收录时附带提醒：该产品线实际上已进入维护模式，Cisco 也已退出超低延迟交换机业务，生态动能已转向 AMD Solarflare 和各 FPGA 厂商。（本站过去链接的旧 exablaze.com 博客已彻底消失。）
+Cisco 收购 Exablaze（2019 年 12 月宣布，2020 年 2 月完成），并将 ExaNIC 产品线更名为 Nexus SmartNIC（K3P-S 即 ExaNIC X25，K3P-Q 即 X100），官方公布的软件触发到响应延迟低至 568 ns，RX 时间戳（timestamp）精度 4 ns。`libexanic` 驱动栈仍在 GitHub 上开源。收录时附带提醒：该产品线实际上已进入维护模式，Cisco 也已退出超低延迟交换机业务，生态动能已转向 AMD Solarflare 和各 FPGA 厂商。（本站过去链接的旧 exablaze.com 博客已彻底消失。）
 
 ## Kernel Bypass（Cloudflare） {#cf-kernel-bypass}
 

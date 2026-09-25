@@ -4,7 +4,7 @@ Please visit **[LowLatencySystem.com](https://lowlatencysystem.com)** for the si
 
 ## About this project
 
-- A curated collection of resources for building low-latency (trading) systems, fully re-researched and rebuilt in **July 2026**.
+- A curated collection of resources for building low-latency (trading) systems, fully re-researched and rebuilt in **July 2026**, with facts re-checked in **September 2026**.
 - **[The reference list](https://lowlatencysystem.com/)** — every reference has a plain-language summary and a difficulty level.
 - **[The Complete Guide](https://lowlatencysystem.com/guide/)** — one page organizing the whole topic, beginner to expert.
 - **[中文版](https://lowlatencysystem.com/zh/)** — the site is fully bilingual (English/中文).
