@@ -15,7 +15,7 @@ nav: home
 
 ## STAC 基准测试（STAC-T0、STAC-N1、STAC-TS） {#stac}
 
-**来源：** [docs.stacresearch.com](https://docs.stacresearch.com/) · 当前纪录：[AMD240422](https://docs.stacresearch.com/news/AMD240422) · <span class="lvl lvl-i">进阶</span> · 持续运营（STAC 于 2020 年被 ISG 收购）
+**来源：** [docs.stacresearch.com](https://docs.stacresearch.com/) · 当前纪录：[AMD240422](https://docs.stacresearch.com/news/AMD240422) · <span class="lvl lvl-i">进阶</span> · 持续运营（STAC 于 2024 年 7 月被 NAG 的母公司 n2 Group 收购）
 
 交易技术领域的行业审计基准权威：STAC-T0 测量 tick-to-trade 网络栈往返延迟（当前纪录 13.9 ns，Exegy/AMD，2024 年），STAC-N1 测量行情数据负载下的主机网络栈，STAC-TS 则覆盖面向 MiFID II 的时间戳/时钟同步合规工具。报告会披露完整的软硬件配置，因此即使你从不亲自跑这些基准，它们也是很有价值的调优参考。需免费注册；本站原先收录的 `stacresearch.com/SFC170206` 链接现已迁移至 `docs.stacresearch.com/SFC170206`。
 
@@ -35,7 +35,7 @@ Solarflare 经典工具 `sysjitter`（v1.4，作者 David Riddoch）的开源归
 
 **来源：** [man 手册页](https://man.archlinux.org/man/cyclictest.8.en) · [kernel.org 上的 rt-tests](https://git.kernel.org/pub/scm/utils/rt-tests/rt-tests.git) · <span class="lvl lvl-i">进阶</span> · 积极维护中
 
-标准的实时延迟测量套件：`cyclictest` 测量定时器唤醒延迟的分布（实时内核的经典基准），`hwlatdetect` 用于定位固件/SMI 引入的延迟，`rteval` 则把它们打包用于负载下的整机评估。在较新的内核（5.17+）上，推荐搭配内核自带的 `rtla` 工具及其 `timerlat`/`osnoise` 追踪器——它不仅告诉你抖动*发生了*，还能告诉你是*哪条*内核路径造成的。
+标准的实时延迟测量套件：`cyclictest` 测量定时器唤醒延迟的分布（实时内核的经典基准），`hwlatdetect` 用于定位固件/SMI 引入的延迟，配套的 `rteval` 工具（独立项目）则把它们打包用于负载下的整机评估。在较新的内核（5.17+）上，推荐搭配内核自带的 `rtla` 工具及其 `timerlat`/`osnoise` 追踪器——它不仅告诉你抖动*发生了*，还能告诉你是*哪条*内核路径造成的。
 
 ## sockperf — 套接字级延迟基准测试 {#sockperf}
 

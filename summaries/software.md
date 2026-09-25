@@ -16,7 +16,7 @@ nav: home
 
 **Source:** [YouTube](https://www.youtube.com/watch?v=sX2nF1fW7kI) · <span class="lvl lvl-a">advanced</span> · 2024
 
-The current definitive conference talk on HFT C++, delivered as a CppCon 2024 keynote by Optiver's options tech lead. Gross walks through building an ultrafast trading system end to end: order-book data structures (why node-based containers lose, why sorted vectors with `lower_bound` win), concurrent queue design, and measuring what actually matters with hardware counters. It updates the folklore from the 2017-era talks with nanosecond-scale techniques used in production. Essential viewing as the successor to Carl Cook's classic.
+The current definitive conference talk on HFT C++, delivered as a CppCon 2024 keynote by Optiver's options tech lead. Gross walks through building an ultrafast trading system end to end: order-book data structures (why node-based containers lose to sorted contiguous vectors, and how search strategy should follow where updates cluster), concurrent queue design, and measuring what actually matters with hardware counters. It updates the folklore from the 2017-era talks with nanosecond-scale techniques used in production. Essential viewing as the successor to Carl Cook's classic.
 
 ## Trading at Light Speed — David Gross (Meeting C++ 2022) {#gross-2022}
 
@@ -70,7 +70,7 @@ Pikus demystifies `std::atomic`: what atomicity and memory ordering actually gua
 
 **Source:** [Part I](https://www.youtube.com/watch?v=c1gO9aB9nbs) · [Part II](https://www.youtube.com/watch?v=CmxkPChOcvw) · <span class="lvl lvl-a">advanced</span> · 2014 (still canonical)
 
-Sutter's two-part masterclass on lock-free fundamentals: exchange-based patterns, the ABA problem, and building a lock-free singly linked list correctly. Part I establishes the mental model and when *not* to go lock-free; Part II works through the hard cases and hazard-pointer-style memory reclamation. A decade old, but nothing has replaced it as the conceptual foundation — modern talks assume you have absorbed it. (The Part II link circulating on old pages, including the previous version of this site, had a truncated video ID; the link above is correct.)
+Sutter's two-part masterclass on lock-free fundamentals. Part I establishes the mental model and when *not* to go lock-free (double-checked locking, `call_once`, lock-free mailboxes); Part II works through lock-free linked lists, the ABA problem, and memory reclamation via atomic smart pointers. A decade old, but nothing has replaced it as the conceptual foundation — modern talks assume you have absorbed it. (The Part II link circulating on old pages, including the previous version of this site, had a truncated video ID; the link above is correct.)
 
 ## Erik Rigtorp — Low-latency C++ Essays and Libraries {#rigtorp}
 
@@ -82,7 +82,7 @@ The most-cited modern collection of low-latency engineering write-ups: "Low late
 
 **Source:** [sites.google.com/site/1024cores](https://sites.google.com/site/1024cores/) · <span class="lvl lvl-a">advanced</span> · ~2010–2013 (relocated)
 
-Vyukov's classic reference on lock-free/wait-free algorithms, memory models, producer-consumer queue taxonomies, and his famous MPSC queue design used inside Go's scheduler and countless trading systems. **Warning:** the old custom domain `1024cores.net` is dead and hijacked (it now serves spam) — the Google Sites URL above is the surviving official location. The content is 2010-era but the algorithms and the "first things first" methodology remain foundational.
+Vyukov's classic reference on lock-free/wait-free algorithms, memory models, producer-consumer queue taxonomies, and his famous intrusive MPSC queue design, reused in JCTools, Akka and countless trading systems (he also designed Go's scalable goroutine scheduler). **Warning:** the old custom domain `1024cores.net` is dead and hijacked (it now serves spam) — the Google Sites URL above is the surviving official location. The content is 2010-era but the algorithms and the "first things first" methodology remain foundational.
 
 ## Aeron — Low-latency Messaging and Clustering {#aeron}
 
@@ -98,21 +98,21 @@ The Disruptor/Aeron creator surveys 25 years of exchange architecture: from main
 
 ## LMAX Disruptor & Chronicle Queue — the GC-free Java Toolkit {#disruptor-chronicle}
 
-**Source:** [Disruptor](https://github.com/LMAX-Exchange/disruptor) · [Chronicle Queue](https://github.com/OpenHFT/Chronicle-Queue) · <span class="lvl lvl-i">intermediate</span> · maintained through 2026
+**Source:** [Disruptor](https://github.com/LMAX-Exchange/disruptor) · [Chronicle Queue](https://github.com/OpenHFT/Chronicle-Queue) · <span class="lvl lvl-i">intermediate</span> · Disruptor stable (4.0, 2023); Chronicle active (2026)
 
-The Disruptor is the ring-buffer inter-thread messaging pattern that started the mechanical-sympathy movement; still maintained (v4.x), and its [user guide](https://lmax-exchange.github.io/disruptor/) remains the definitive read. Chronicle Queue (Peter Lawrey's OpenHFT) provides microsecond persisted messaging via memory-mapped files — broker-less, everything on disk — and is used across major investment banks; the Chronicle 25 series supports Java 21. Together they define GC-free Java design: preallocated, flyweight, off-heap.
+The Disruptor is the ring-buffer inter-thread messaging pattern that started the mechanical-sympathy movement; stable rather than fast-moving (last release 4.0.0, Sept 2023), and its [user guide](https://lmax-exchange.github.io/disruptor/) remains the definitive read. Chronicle Queue (Peter Lawrey's OpenHFT) provides microsecond persisted messaging via memory-mapped files — broker-less, everything on disk — and is used across major investment banks; current releases use calendar versioning (2026.x) and fully support Java 25 (July 2026). Together they define GC-free Java design: preallocated, flyweight, off-heap.
 
 ## Azul Platform Prime (Zing) and the C4 Pauseless Collector {#azul-zing}
 
 **Source:** [docs.azul.com](https://docs.azul.com/prime/c4-garbage-collection.html) · <span class="lvl lvl-i">intermediate</span> · current docs
 
-Azul's Zing JVM — now packaged as "Azul Zing Builds of OpenJDK" within Azul Platform Prime — remains the commercial option for pauseless Java, via the C4 (Continuously Concurrent Compacting Collector) and the Falcon JIT. This page documents how C4 achieves generational, fully concurrent compaction without stop-the-world pauses. Weigh it against OpenJDK's free **generational ZGC** (default since JDK 21, matured through JDK 25), which has closed much of the gap for latency-sensitive workloads.
+Azul's Zing JVM — now packaged as "Azul Zing Builds of OpenJDK" within Azul Platform Prime — remains the commercial option for pauseless Java, via the C4 (Continuously Concurrent Compacting Collector) and the Falcon JIT. This page documents how C4 achieves generational, fully concurrent compaction without stop-the-world pauses. Weigh it against OpenJDK's free **generational ZGC** (introduced in JDK 21, ZGC's default mode since JDK 23 and its only mode since JDK 24; enable with `-XX:+UseZGC` — G1 remains the JVM default), which has closed much of the gap for latency-sensitive workloads.
 
 ## Rust vs C++ for Trading Systems — Databento {#rust-vs-cpp}
 
 **Source:** [databento.com](https://databento.com/blog/rust-vs-cpp) · <span class="lvl lvl-i">intermediate</span> · August 2025
 
-The most grounded public comparison of the two languages for trading, written by a market-data vendor that runs both in production. C++ still wins on ecosystem maturity, exchange-connectivity libraries and ultra-tuned hot paths; Rust delivers near-identical latency with compile-time elimination of memory bugs, and incremental adoption works well via C FFI. Reflects the actual mid-2026 industry consensus rather than language advocacy.
+The most grounded public comparison of the two languages for trading, written by a market-data vendor that runs both in production. C++ still wins on ecosystem maturity, exchange-connectivity libraries and ultra-tuned hot paths; Rust can match C++ latency with compile-time elimination of memory bugs, and incremental adoption works well via C FFI. Read it with the same vendor's counterpoint, [Why we didn't rewrite our feed handler in Rust](https://databento.com/blog/why-we-didnt-rewrite-our-feed-handler-in-rust) (Oct 2025), which explains why their hottest path stayed in C++ (tooling and low-level control of cache, NUMA and kernel bypass). Together they reflect the actual industry consensus rather than language advocacy.
 
 ## hftbacktest — Rust HFT Backtesting Framework {#hftbacktest}
 

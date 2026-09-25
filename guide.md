@@ -8,7 +8,7 @@ nav: guide
 
 # The Complete Guide to Low-Latency Trading Systems
 
-*One page, beginner to expert. Updated July 2026. Every technique here links back to a reference in the [collection](/) where you can go deeper.*
+*One page, beginner to expert. Updated July 2026; facts re-checked September 2026. Every technique here links back to a reference in the [collection](/) where you can go deeper.*
 
 ## Contents
 {:.no_toc}
@@ -35,7 +35,7 @@ Why does it matter? In electronic markets, opportunities are claimed in arrival 
 | ~100 ns | DRAM access; core-to-core message across CPU chiplets |
 | ~500 ns–2 µs | A whole software tick-to-trade path with kernel bypass |
 | ~10–50 µs | A well-tuned kernel network round trip; one bad TLB shootdown |
-| ~1 ms | A garbage-collection pause you failed to design away; ~150 km of fiber |
+| ~1 ms | A garbage-collection pause you failed to design away; ~200 km of fiber (one way) |
 
 Two consequences fall out of this table. First, **physics is a hard budget**: at nanosecond scale, cable length matters, which is why firms pay for co-location racks meters from the exchange's matching engine and why microwave links (which beat fiber's speed of light in glass) exist between Chicago and New York. Second, **every layer counts**: a perfectly tuned application loses if the OS interrupts it, the NIC buffers it, or the switch queues it. Low latency is a *full-stack* property.
 
@@ -55,7 +55,7 @@ Exchange ◀──order entry (TCP)─────────── [switch] �
 
 The tick-to-trade budget is spent, roughly in order:
 
-1. **Wire → NIC (network)**: propagation through fiber/copper, switch forwarding, NIC PHY/MAC. Layer-1 switches cut this to ~4 ns; note that at 25GbE, forward error correction (FEC) alone adds ~100 ns, so ultra-low-latency shops run FEC-off over short links.
+1. **Wire → NIC (network)**: propagation through fiber/copper, switch forwarding, NIC PHY/MAC. Layer-1 switches cut this to ~4 ns; note that at 25GbE, forward error correction (FEC) alone adds ~100–250 ns per hop (RS-FEC is the slow end), so ultra-low-latency shops run FEC-off over short links.
 2. **NIC → application (host ingress)**: DMA, then either the kernel network stack (microseconds) or a kernel-bypass stack reading directly from user space (hundreds of nanoseconds).
 3. **Decode & book build**: parsing the exchange protocol (e.g. ITCH over MoldUDP64) and updating an order book — pure CPU/cache work.
 4. **Decision**: the strategy logic itself. In competitive systems this is nanoseconds — precomputed decisions, table lookups — not "run a model".
@@ -89,10 +89,10 @@ A useful habit from the practitioners' guides: change one thing at a time, and k
 
 **CPU choice (2026).** The latency path wants *few, fast, cache-rich cores*, not many slow ones:
 
-- **Overclocked boutique servers** (Blackcore, Hypertec CIARA) are the top software tier: liquid-cooled, binned, overclocked Xeon/Core parts at ~5+ GHz all-core, with pre-tuned BIOS profiles and burn-in. Overclocking helps more than clocks: it cuts RAM latency (~34%), cache latency (~30%) and PCIe latency. (HPE's old "Trade and Match" overclocked line is discontinued — this niche went boutique.)
-- **AMD EPYC 9005 F-series** (e.g. 9575F: 64 cores, 5.0 GHz boost, 256 MB L3) is the designated high-frequency server SKU where standard iron is required; **EPYC 4004/4005 X3D** parts bring 3D V-Cache (128 MB L3) to cheap single-socket builds — huge L3 keeps the order book cache-resident (~49-cycle L3 vs ~350-cycle DRAM).
-- **Intel Xeon 6** counters with Latency Optimized Mode (holds mesh/uncore frequency high — [~17% measured gain](/summaries/hardware/#phoronix-lom)), Efficiency Latency Control, and SST-BF (a subset of cores at guaranteed higher base frequency for your hot threads).
-- **Topology beats brand**: Intel's mesh gives 50–80 ns core-to-core even across dies; AMD is ~8–25 ns inside a CCX but 150–180 ns across CCDs. Measure with c2clat and pin communicating threads accordingly.
+- **Overclocked boutique servers** (Blackcore, Hypertec CIARA) are the top software tier: liquid-cooled, binned, overclocked Intel Core/Xeon W/Xeon 600 or AMD Ryzen/Threadripper parts at ~5+ GHz all-core, with pre-tuned BIOS profiles and burn-in. Overclocking helps more than clocks: it cuts RAM latency (~34%), cache latency (~30%) and PCIe latency. (HPE's old "Trade and Match" overclocked line is discontinued — this niche went boutique.)
+- **AMD EPYC 9005 F-series** (e.g. 9575F: 64 cores, 5.0 GHz boost, 256 MB L3; or the 16-core 9175F with 512 MB L3) is the designated high-frequency server SKU where standard iron is required; **EPYC 4004/4005 X3D** parts bring 3D V-Cache (128 MB L3 total, though the extra 64 MB sits on only one of the two CCDs) to cheap single-socket builds — huge L3 keeps the order book cache-resident (~49-cycle L3 vs ~350-cycle DRAM). **Next up:** Zen 6 EPYC 9006 "Venice" (announced July 2026; high-frequency 9686F at 5 GHz boost) ships in servers from Q4 2026.
+- **Intel Xeon 6** (Granite Rapids P-cores — still Intel's latency part: Xeon 6+ Clearwater Forest is E-core-only, and Xeon 7 Diamond Rapids slipped to 2027) counters with Latency Optimized Mode (holds mesh/uncore frequency high — [~17% measured gain](/summaries/hardware/#phoronix-lom)), Efficiency Latency Control, and SST-BF (a subset of cores at guaranteed higher base frequency for your hot threads).
+- **Topology beats brand**: Intel's mesh gives 50–80 ns core-to-core even across dies; AMD is ~8–25 ns inside a CCX but roughly 85–180 ns across CCDs (varies with generation and firmware). Measure with c2clat and pin communicating threads accordingly.
 
 **Settled architecture decisions:**
 
@@ -110,7 +110,7 @@ The goal: give your hot threads **dedicated, undisturbed cores**. Modern Linux c
 3. **Kill frequency and sleep-state transitions.** Performance governor; limit C-states via `cpu_dma_latency` PM-QoS (tuned's latency profiles hold it open) — waking from a deep C-state costs tens of microseconds.
 4. **Tame memory.** Static hugepages (fewer TLB misses), `mlockall()` (no page faults), swap off, transparent hugepages off, automatic NUMA balancing off. Beware [TLB shootdowns](/summaries/linux-tuning/#tlb-shootdowns): `munmap`/`madvise` from any thread can interrupt every core in the process — preallocate and never free on the hot path.
 5. **Decide on speculative-execution mitigations.** `mitigations=off` is standard on physically-secured, single-tenant trading hosts (historically 15–25% penalty when on; newer CPUs fix more in hardware). Do the risk assessment per host.
-6. **Consider PREEMPT_RT.** Real-time preemption is **in mainline Linux since 6.12 (Nov 2024)** — no more out-of-tree patches — and `kernel-rt` ships with standard RHEL 9/10. Note RT optimizes *worst-case* scheduling latency, sometimes at a small throughput cost; many trading loads prefer a tuned standard kernel plus busy-polling. Red Hat's rule of thumb: standard-kernel tuning gets ~90% of the win.
+6. **Consider PREEMPT_RT.** Real-time preemption is **in mainline Linux since 6.12 (Nov 2024)** — no more out-of-tree patches — and `kernel-rt` ships with standard RHEL 9/10. Note RT optimizes *worst-case* scheduling latency, at a throughput cost Red Hat puts at 0–30% depending on workload; many trading loads prefer a tuned standard kernel plus busy-polling. Red Hat's rule of thumb: standard-kernel tuning gets ~90% of the win. Kernel-version note: since **Linux 7.0 (Apr 2026)** the old `PREEMPT_NONE`/`PREEMPT_VOLUNTARY` models are gone on x86, arm64 and other major architectures — a "standard" kernel now means full or lazy (`PREEMPT_LAZY`, 6.13+) preemption, so re-benchmark when moving to 7.x.
 7. **Verify.** `rtla timerlat`/`osnoise` (kernel 5.17+), sysjitter, cyclictest — after every change.
 
 ## 6. Level 4 — The network path {#network}
@@ -137,10 +137,10 @@ The goal: give your hot threads **dedicated, undisturbed cores**. Modern Linux c
 
 Language is the smallest choice; **mechanical sympathy** — writing code the CPU can execute predictably — is the real discipline:
 
-- **Own the cache.** Data layout dominates: contiguous arrays over node-based containers, sorted vectors over maps, one cache line per writer (avoid false sharing — pad with `std::hardware_destructive_interference_size`). The order book is a data-structure problem before it is an algorithm problem ([Gross 2024](/summaries/software/#gross-2024)).
+- **Own the cache.** Data layout dominates: contiguous arrays over node-based containers, sorted vectors over maps, one cache line per writer (avoid false sharing — pad with `std::hardware_destructive_interference_size`, or a fixed 64/128 bytes for ABI stability). The order book is a data-structure problem before it is an algorithm problem ([Gross 2024](/summaries/software/#gross-2024)).
 - **Nothing slow on the hot path.** No allocations, no syscalls, no exceptions thrown, no locks, no page faults. Preallocate everything; pin threads; busy-poll instead of sleeping. Keep the hot path *hot*: even branch predictors and instruction caches go cold if you run it rarely — hence **cache warming** with dummy traffic, one of the two biggest measured wins in the [Imperial College study](/summaries/software/#hft-paper) (the other: `constexpr` — compute at compile time).
-- **Concurrency: message passing over sharing.** The canonical design is single-threaded business logic fed by lock-free SPSC queues ([build one from scratch](/summaries/software/#frasch-spsc), [rigtorp's implementations](/summaries/software/#rigtorp)). Learn the memory model properly ([Pikus on atomics](/summaries/software/#pikus-atomics), [Sutter's two-parter](/summaries/software/#sutter-lockfree), [Vyukov's 1024cores](/summaries/software/#vyukov-1024cores)) — and remember "lock-free" is about progress guarantees, not automatic speed.
-- **C++** remains the industry default (the CppCon canon above, now led by Optiver's talks). **Rust** reached effective latency parity and is growing fast — [Databento's comparison](/summaries/software/#rust-vs-cpp) is the honest 2026 consensus; C++ keeps the ecosystem edge. **Java** works at low microseconds if you refuse to create garbage: [LMAX Disruptor, Chronicle Queue](/summaries/software/#disruptor-chronicle), [Aeron](/summaries/software/#aeron) for messaging/clustering, and pauseless GC via [Azul C4](/summaries/software/#azul-zing) or OpenJDK's generational ZGC (JDK 21+).
+- **Concurrency: message passing over sharing.** The canonical design is single-threaded business logic fed by lock-free SPSC queues ([build one from scratch](/summaries/software/#frasch-spsc), [rigtorp's implementations](/summaries/software/#rigtorp)). Learn the memory model properly ([Pikus on atomics](/summaries/software/#pikus-atomics), [Sutter's two-parter](/summaries/software/#sutter-lockfree), [Vyukov's 1024cores](/summaries/software/#vyukov-1024cores)) — and remember "lock-free" is about progress guarantees, not automatic speed. [C++26](https://herbsutter.com/2026/03/29/c26-is-done-trip-report-march-2026-iso-c-standards-meeting-london-croydon-uk/) (finalized March 2026) standardizes `std::hazard_pointer` and `std::rcu` for safe lock-free memory reclamation.
+- **C++** remains the industry default (the CppCon canon above, now led by Optiver's talks). **Rust** can match C++ latency and is growing fast — [Databento's comparison](/summaries/software/#rust-vs-cpp) (read with its counterpoint on why their feed handler stayed in C++) is the honest consensus; C++ keeps the ecosystem and low-level-tooling edge. **Java** works at low microseconds if you refuse to create garbage: [LMAX Disruptor, Chronicle Queue](/summaries/software/#disruptor-chronicle), [Aeron](/summaries/software/#aeron) for messaging/clustering, and pauseless GC via [Azul C4](/summaries/software/#azul-zing) or OpenJDK's generational ZGC (introduced in JDK 21; ZGC's only mode since JDK 24; current LTS is JDK 25).
 - **Know the protocols.** Real systems speak ITCH/OUCH over MoldUDP64/SoupBinTCP or exchange equivalents — [Databento's microstructure guides](/summaries/software/#databento-micro) are the approachable reference.
 - **Architecture lesson from exchanges themselves** ([Thompson, Evolution of Financial Exchange Architectures](/summaries/software/#thompson-exchange)): deterministic single-threaded logic + sequenced event logs + replicated state machines beats distributed locking on both latency and correctness.
 
@@ -152,7 +152,7 @@ When software runs out of road (~1 µs), the datapath moves into hardware:
 
 - **What an FPGA buys**: deterministic pipeline latency — parse, book-build, decide and emit the order entirely in gateware, unaffected by caches, schedulers or interrupts. Typical competitive tick-to-trade: tens to hundreds of nanoseconds ([an implementable ITCH/OUCH pipeline](/summaries/fpga/#dgway-itch-ouch)).
 - **State of the art**: AMD's [Alveo UL3524](/summaries/fpga/#ul3524) (2023) was the first FPGA card purpose-built for trading (<3 ns transceivers); on it, Exegy + AMD set the [13.9 ns STAC-T0 record](/summaries/fpga/#stac-t0-record) (2024) using an asynchronous (clockless) critical path with ~200 ps jitter. The cheaper UL3422 (2024) pushed the tier down-market.
-- **The usual architecture is hybrid**: FPGA handles the wire-speed hot path; software (kernel-bypass C++) handles strategy, risk and everything that changes daily. Vendors sell the building blocks — [Orthogone](/summaries/fpga/#orthogone) (17.1 ns MAC/PCS, 6.2 ns TX TCP offload), Exegy/Enyx, [Algo-Logic](/summaries/fpga/#algo-logic), Xelera (FPGA ML inference).
+- **The usual architecture is hybrid**: FPGA handles the wire-speed hot path; software (kernel-bypass C++) handles strategy, risk and everything that changes daily. Vendors sell the building blocks — [Orthogone](/summaries/fpga/#orthogone) (17.1 ns MAC/PCS, 6.2 ns TX TCP offload), Exegy (which absorbed Enyx in 2022 and NovaSparks in 2026), [Algo-Logic](/summaries/fpga/#algo-logic), Xelera (FPGA ML inference).
 - **The frontier**: top firms burn deterministic functions into **ASICs** (10–50 ns, rigid, capital-intensive) or eFPGA-in-ASIC hybrids; the next battleground is inline ML inference on the critical path ([strategic overview](/summaries/fpga/#ateam-fpga)).
 
 ## 9. Time: synchronization & timestamping {#time}
@@ -161,8 +161,8 @@ When software runs out of road (~1 µs), the datapath moves into hardware:
 
 You cannot measure — or legally operate — a trading system without serious clocks:
 
-- **Regulation sets the floor**: EU MiFID II RTS 25 requires HFT firms to stay within **100 µs of UTC with 1 µs timestamp granularity**, documented and traceable ([the requirement mapped to Linux](/summaries/timing/#mifid-rts25); note RTS 25's successor is being drafted in the ongoing MiFID review).
-- **PTP (IEEE 1588-2019) with hardware timestamping** is the workhorse: [linuxptp](/summaries/timing/#linuxptp) (`ptp4l` + `phc2sys`) on a hardware-timestamping NIC reaches ~3 µs conservatively, ~10 ns on good hardware — but [NIC choice changes accuracy by 45×](/summaries/timing/#nic-ptp-accuracy), so measure. [Meta's deployment](/summaries/timing/#meta-ptp) (~436 ns worst-case, open-source stack) is the reference architecture.
+- **Regulation sets the floor**: EU rules require HFT firms to stay within **100 µs of UTC**, documented and traceable. Since 2 March 2026 this lives in [Delegated Regulation (EU) 2025/1155](https://eur-lex.europa.eu/eli/reg_del/2025/1155/oj/eng) under MiFIR, which replaced MiFID II RTS 25 and tightened the finest timestamp granularity from 1 µs to 0.1 µs; the UK still applies its onshored RTS 25 (1 µs). See [the requirement mapped to Linux](/summaries/timing/#mifid-rts25).
+- **PTP (IEEE 1588-2019, plus its 2022–2024 amendments; a full revision is in progress) with hardware timestamping** is the workhorse: [linuxptp](/summaries/timing/#linuxptp) (`ptp4l` + `phc2sys`) on a hardware-timestamping NIC reaches ~3 µs conservatively, ~10 ns on good hardware — but [NIC choice changes accuracy by 45×](/summaries/timing/#nic-ptp-accuracy), so measure. [Meta's deployment](/summaries/timing/#meta-ptp) (~436 ns worst-case, open-source stack) is the reference architecture.
 - **Open hardware ate the grandmaster**: the [OCP Time Card](/summaries/timing/#time-card) (GNSS + atomic clock on a PCIe card) turns any server into a stratum-1 appliance.
 - **Sub-nanosecond**: [White Rabbit](/summaries/timing/#white-rabbit) — CERN technology, now the PTP High Accuracy profile — is offered by [Deutsche Börse as a co-location service](/summaries/timing/#eurex-wr): you sync to the exchange's own clock.
 - **Inside the box**: cycle-accurate timing via invariant TSC and the [rdtsc methodology](/summaries/timing/#rdtsc-paper).

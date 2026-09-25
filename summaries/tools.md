@@ -14,7 +14,7 @@ nav: home
 
 ## STAC Benchmarks (STAC-T0, STAC-N1, STAC-TS) {#stac}
 
-**Source:** [docs.stacresearch.com](https://docs.stacresearch.com/) · current record: [AMD240422](https://docs.stacresearch.com/news/AMD240422) · <span class="lvl lvl-i">intermediate</span> · ongoing (STAC acquired by ISG, 2020)
+**Source:** [docs.stacresearch.com](https://docs.stacresearch.com/) · current record: [AMD240422](https://docs.stacresearch.com/news/AMD240422) · <span class="lvl lvl-i">intermediate</span> · ongoing (STAC acquired by n2 Group, parent of NAG, July 2024)
 
 The industry's audited benchmark authority for trading technology: STAC-T0 measures tick-to-trade network-stack round trip (current record 13.9 ns, Exegy/AMD 2024), STAC-N1 measures host network stacks under market-data workloads, and STAC-TS covers timestamping/clock-sync compliance tooling for MiFID II. Reports disclose full hardware/software configurations, which makes them valuable tuning references even if you never run the benchmarks. Free registration required; the old `stacresearch.com/SFC170206` link this site carried now lives at `docs.stacresearch.com/SFC170206`.
 
@@ -34,7 +34,7 @@ A small tool measuring OS "hiccups" — scheduling interruptions experienced by 
 
 **Source:** [man page](https://man.archlinux.org/man/cyclictest.8.en) · [rt-tests at kernel.org](https://git.kernel.org/pub/scm/utils/rt-tests/rt-tests.git) · <span class="lvl lvl-i">intermediate</span> · actively maintained
 
-The standard real-time latency measurement suite: `cyclictest` measures timer-wakeup latency distributions (the canonical RT kernel benchmark), `hwlatdetect` isolates firmware/SMI-induced latency, and `rteval` wraps them for whole-system evaluation under load. On modern kernels (5.17+), the in-kernel `rtla` tool with its `timerlat`/`osnoise` tracers is the recommended companion — it tells you not just *that* jitter happened but *which* kernel path caused it.
+The standard real-time latency measurement suite: `cyclictest` measures timer-wakeup latency distributions (the canonical RT kernel benchmark), `hwlatdetect` isolates firmware/SMI-induced latency, and the companion `rteval` tool (a separate project) wraps them for whole-system evaluation under load. On modern kernels (5.17+), the in-kernel `rtla` tool with its `timerlat`/`osnoise` tracers is the recommended companion — it tells you not just *that* jitter happened but *which* kernel path caused it.
 
 ## sockperf — Socket-level Latency Benchmarking {#sockperf}
 

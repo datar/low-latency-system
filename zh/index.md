@@ -13,7 +13,7 @@ translation: /
 
 > **初次接触这个领域？** 请先读 **[完整指南](/zh/guide/)**——用一个页面把整个主题从入门到专家梳理清楚：延迟是什么、纳秒都花在了哪里、每项技术分别能换来多少收益。
 
-*内容已于 2026 年 7 月全面更新。本次更新背后的调研——逐一核查每个链接、替换失效链接、补充最新的前沿参考——记录在[研究笔记](/research/)（英文）中。*
+*内容已于 2026 年 7 月全面更新，并于 2026 年 9 月重新核查、修正。本次更新背后的调研——逐一核查每个链接、替换失效链接、补充最新的前沿参考——记录在[研究笔记](/research/)（英文）中。*
 
 ## 从这里开始 {#start-here}
 
@@ -24,8 +24,8 @@ translation: /
 
 ## Linux 操作系统调优 {#linux-os-tuning}
 
-- [Monitoring and Managing System Status and Performance (RHEL 9)](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/monitoring_and_managing_system_status_and_performance/index) [摘要](/zh/summaries/linux-tuning/#rhel-perf){:.sum} <span class="lvl lvl-b">入门</span> — 已退役的 RHEL 7 性能调优指南的现代继任者。
-- [Optimizing RHEL for Real Time for Low Latency Operation](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux_for_real_time/9/html-single/optimizing_rhel_9_for_real_time_for_low_latency_operation/index) [摘要](/zh/summaries/linux-tuning/#rhel-rt){:.sum} <span class="lvl lvl-i">进阶</span> — Red Hat 权威的低延迟指南；自 RHEL 9 起，实时内核已随标准版 RHEL 一同提供。
+- [Monitoring and Managing System Status and Performance (RHEL 10)](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/monitoring_and_managing_system_status_and_performance/index) [摘要](/zh/summaries/linux-tuning/#rhel-perf){:.sum} <span class="lvl lvl-b">入门</span> — 已退役的 RHEL 7 性能调优指南的现代继任者。
+- [Optimizing RHEL for Real Time for Low Latency Operation (RHEL 10)](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux_for_real_time/10/html-single/optimizing_rhel_for_real_time_for_low_latency_operation/index) [摘要](/zh/summaries/linux-tuning/#rhel-rt){:.sum} <span class="lvl lvl-i">进阶</span> — Red Hat 权威的低延迟指南；自 RHEL 9 起，实时内核已随标准版 RHEL 一同提供。
 - [Erik Rigtorp — Low Latency Tuning Guide（低延迟调优指南）](https://rigtorp.se/low-latency-guide/) [摘要](/zh/summaries/linux-tuning/#rigtorp-guide){:.sum} <span class="lvl lvl-i">进阶</span> — 被引用最多的 HFT 风格 x86_64 调优实践清单。
 - [TuneD — Linux 调优守护进程](https://tuned-project.org/) [摘要](/zh/summaries/linux-tuning/#tuned){:.sum} <span class="lvl lvl-b">入门</span> — `latency-performance`、`network-latency` 和 `cpu-partitioning` 等配置文件的官方主页。
 - [Getting Started with PREEMPT_RT](https://realtime-linux.org/getting-started-with-preempt_rt-guide/) [摘要](/zh/summaries/linux-tuning/#preempt-rt-guide){:.sum} <span class="lvl lvl-b">入门</span> — 实时抢占自 Linux 6.12（2024 年）起已进入主线内核；这份指南教你怎么用。
@@ -39,11 +39,11 @@ translation: /
 
 ## 服务器硬件与 CPU {#server-hardware--cpus}
 
-自本站上次更新以来，格局已经改变：HPE 停产了其超频的"Trade and Match"服务器系列，精品厂商（Blackcore、Hypertec CIARA）如今占据了这个细分市场。在主流阵营，AMD EPYC 9005 F 系列（如 9575F）、带 3D V-Cache 的 EPYC 4004/4005 X3D 型号，以及配备 Latency Optimized Mode 的 Intel Xeon 6 是当前的选择。单路（single-socket）已是延迟路径上的定论架构，而核间延迟（core-to-core latency）如今已是选择 CPU 时的一等指标。
+自本站上次更新以来，格局已经改变：HPE 停产了其超频的"Trade and Match"服务器系列，精品厂商（Blackcore、Hypertec CIARA）如今占据了这个细分市场。在主流阵营，AMD EPYC 9005 F 系列（如 9575F）、带 3D V-Cache 的 EPYC 4004/4005 X3D 型号，以及配备 Latency Optimized Mode 的 Intel Xeon 6 是当前可以买到的选择（AMD 的 Zen 6 EPYC 9006 "Venice" 已于 2026 年 7 月发布，含 5 GHz 的 9686F 型号，2026 年第四季度起进入服务器；Intel 下一代 P 核 Xeon 推迟到 2027 年）。单路（single-socket）已是延迟路径上的定论架构，而核间延迟（core-to-core latency）如今已是选择 CPU 时的一等指标。
 
-- [AMD EPYC 9005 BIOS & Workload Tuning Guide](https://docs.amd.com/v/u/en-US/58467_amd-epyc-9005-tg-bios-and-workload) [摘要](/zh/summaries/hardware/#amd-9005-tuning){:.sum} <span class="lvl lvl-a">高级</span> — 当前 AMD 服务器调优的权威文档（rev 2.2，2026 年 6 月）。
+- [AMD EPYC 9005 BIOS & Workload Tuning Guide](https://docs.amd.com/v/u/en-US/58467_amd-epyc-9005-tg-bios-and-workload) [摘要](/zh/summaries/hardware/#amd-9005-tuning){:.sum} <span class="lvl lvl-a">高级</span> — 当前 AMD 服务器调优的权威文档。
 - [Dell PowerEdge 16G BIOS Tuning — Low Latency](https://infohub.delltechnologies.com/en-us/l/poweredge-bios-performance-and-workload-tuning-guide-for-16g/low-latency-17/) [摘要](/zh/summaries/hardware/#dell-16g){:.sum} <span class="lvl lvl-i">进阶</span> — 取代了 Dell 那份已失效的 2010 年低延迟白皮书。
-- [Configuring HPE ProLiant Servers for Low-Latency Applications](https://www.hpe.com/psnow/doc/c01804533) [摘要](/zh/summaries/hardware/#hpe-low-latency){:.sum} <span class="lvl lvl-i">进阶</span> — HPE 长期维护的白皮书搬到了新地址，已更新至 Gen11。
+- [Configuring HPE ProLiant Servers for Low-Latency Applications](https://www.hpe.com/psnow/doc/c01804533) [摘要](/zh/summaries/hardware/#hpe-low-latency){:.sum} <span class="lvl lvl-i">进阶</span> — HPE 长期维护的白皮书搬到了新地址，已更新至 Gen11（Gen12 服务器请使用内置的"Low Latency"工作负载配置）。
 - [Intel Xeon 6 Performance & Power Profiles (PDF)](https://builders.intel.com/docs/networkbuilders/intel-xeon-6-processors-performance-and-power-profiles-1746785299.pdf) [摘要](/zh/summaries/hardware/#intel-xeon6-profiles){:.sum} <span class="lvl lvl-a">高级</span> — Latency Optimized Mode 与 Efficiency Latency Control，来自 Intel 官方。
 - [Phoronix — Xeon 6 Latency Optimized Mode 基准测试](https://www.phoronix.com/review/intel-latency-optimized-mode) [摘要](/zh/summaries/hardware/#phoronix-lom){:.sum} <span class="lvl lvl-i">进阶</span> — 独立测量数据：几何平均约 17% 的提升。
 - [Xeon 6 High-Priority Cores (SST-BF) Explained](https://www.servethehome.com/intel-xeon-6-high-priority-and-low-priority-cores-explained/) [摘要](/zh/summaries/hardware/#sth-sst){:.sum} <span class="lvl lvl-b">入门</span> — 为你的热点线程提供有保障的高频核心。
@@ -105,7 +105,7 @@ translation: /
 - [White Rabbit (CERN)](https://white-rabbit.web.cern.ch/) [摘要](/zh/summaries/timing/#white-rabbit){:.sum} <span class="lvl lvl-i">进阶</span> — 亚纳秒级授时，现已成为 IEEE 1588-2019 High Accuracy profile。
 - [Deutsche Börse / Eurex White Rabbit 服务](https://www.eurex.com/ex-en/support/initiatives/archive/high-precision-time-white-rabbit-pilot) [摘要](/zh/summaries/timing/#eurex-wr){:.sum} <span class="lvl lvl-b">入门</span> — 交易所如何把自己的时钟分发给托管（co-location）客户。
 - [linuxptp 文档](https://linuxptp.nwtime.org/documentation/) [摘要](/zh/summaries/timing/#linuxptp){:.sum} <span class="lvl lvl-i">进阶</span> — ptp4l、phc2sys、ts2phc：标准的 Linux PTP 栈。
-- [MiFID II RTS 25 and time sync on Linux (Red Hat)](https://www.redhat.com/en/blog/mifid-ii-rts-25-and-time-synchronisation-red-hat-enterprise-linux-and-red-hat-virtualization) [摘要](/zh/summaries/timing/#mifid-rts25){:.sum} <span class="lvl lvl-b">入门</span> — 把监管要求逐条映射到 Linux 的能力上。
+- [MiFID II RTS 25 and time sync on Linux (Red Hat)](https://www.redhat.com/en/blog/mifid-ii-rts-25-and-time-synchronisation-red-hat-enterprise-linux-and-red-hat-virtualization) [摘要](/zh/summaries/timing/#mifid-rts25){:.sum} <span class="lvl lvl-b">入门</span> — 把监管要求逐条映射到 Linux 的能力上。注意：在欧盟，RTS 25 已自 2026 年 3 月 2 日起被[授权条例 (EU) 2025/1155](https://eur-lex.europa.eu/eli/reg_del/2025/1155/oj/eng) 取代（100 µs 上限不变，最高档的时间戳粒度收紧到 0.1 µs）。
 - [Real-world PTP accuracy across NICs (scottstuff.net)](https://scottstuff.net/posts/2025/05/07/connectx-4-and-linuxptp/) [摘要](/zh/summaries/timing/#nic-ptp-accuracy){:.sum} <span class="lvl lvl-a">高级</span> — 2025 年实测数据：网卡选择能让 PTP 精度相差 45 倍。
 - [Intel rdtsc 基准测试白皮书（镜像）](https://cis.temple.edu/~qzeng/cis3207-spring18/files/ia-32-ia-64-benchmark-code-execution-paper.pdf) [摘要](/zh/summaries/timing/#rdtsc-paper){:.sum} <span class="lvl lvl-a">高级</span> — Paoloni 关于时钟周期级精确计时的经典论文（Intel 已删除原文）。
 
@@ -144,12 +144,12 @@ translation: /
 - [LMAX Disruptor](https://github.com/LMAX-Exchange/disruptor) & [Chronicle Queue](https://github.com/OpenHFT/Chronicle-Queue) [摘要](/zh/summaries/software/#disruptor-chronicle){:.sum} <span class="lvl lvl-i">进阶</span> — 无 GC 的 Java 工具箱。
 - [Aeron](https://github.com/aeron-io/aeron) [摘要](/zh/summaries/software/#aeron){:.sum} <span class="lvl lvl-a">高级</span> — 低延迟消息传递与集群；注意组织已迁移至新的 `aeron-io`。
 - [Evolution of Financial Exchange Architectures — Martin Thompson](https://www.youtube.com/watch?v=qDhTjE0XmkE) [摘要](/zh/summaries/software/#thompson-exchange){:.sum} <span class="lvl lvl-i">进阶</span> — 一场演讲讲完 25 年的交易所架构演进。
-- [Azul Platform Prime (Zing) 与 C4 收集器](https://docs.azul.com/prime/c4-garbage-collection.html) [摘要](/zh/summaries/software/#azul-zing){:.sum} <span class="lvl lvl-i">进阶</span> — 无停顿的 Java；可与 OpenJDK 免费的分代 ZGC（JDK 21+）对比。
+- [Azul Platform Prime (Zing) 与 C4 收集器](https://docs.azul.com/prime/c4-garbage-collection.html) [摘要](/zh/summaries/software/#azul-zing){:.sum} <span class="lvl lvl-i">进阶</span> — 无停顿的 Java；可与 OpenJDK 免费的分代 ZGC（JDK 24 起为 ZGC 唯一模式）对比。
 - 历史资料：[SubMicroTrading 博客](https://submicro.blogspot.com) + [开源代码](https://github.com/gsitgithub/SubMicroTrading) [摘要](/zh/summaries/software/#submicro){:.sum} · [epickrram（LMAX）关于抖动的文章](https://epickrram.blogspot.com/2015/09/reducing-system-jitter.html) [摘要](/zh/summaries/software/#epickrram){:.sum}
 
 ### Rust
 
-- [Rust vs C++ for trading systems (Databento)](https://databento.com/blog/rust-vs-cpp) [摘要](/zh/summaries/software/#rust-vs-cpp){:.sum} <span class="lvl lvl-i">进阶</span> — 2026 年年中业界脚踏实地的共识。
+- [Rust vs C++ for trading systems (Databento)](https://databento.com/blog/rust-vs-cpp) [摘要](/zh/summaries/software/#rust-vs-cpp){:.sum} <span class="lvl lvl-i">进阶</span> — 业界脚踏实地的观点；可与其反方文章[为何行情处理器仍用 C++](https://databento.com/blog/why-we-didnt-rewrite-our-feed-handler-in-rust)对照阅读。
 - [hftbacktest](https://github.com/nkaz001/hftbacktest) [摘要](/zh/summaries/software/#hftbacktest){:.sum} <span class="lvl lvl-a">高级</span> — 旗舰级的开源 Rust HFT 项目。
 
 ### 社区与协议

@@ -17,7 +17,7 @@ nav: home
 
 **来源：** [YouTube](https://www.youtube.com/watch?v=sX2nF1fW7kI) · <span class="lvl lvl-a">高级</span> · 2024 年
 
-当前关于高频交易 C++ 的权威会议演讲，由 Optiver 期权技术负责人在 CppCon 2024 作为主题演讲发表。Gross 完整讲解了如何端到端构建一个极速交易系统：订单簿数据结构（为什么基于节点的容器会输、为什么配合 `lower_bound` 的有序 vector 会赢）、并发队列设计，以及如何用硬件计数器测量真正重要的指标。它以生产环境中实际使用的纳秒级技巧，更新了 2017 年那批演讲流传下来的经验之谈。作为 Carl Cook 经典演讲的续篇，值得必看。
+当前关于高频交易 C++ 的权威会议演讲，由 Optiver 期权技术负责人在 CppCon 2024 作为主题演讲发表。Gross 完整讲解了如何端到端构建一个极速交易系统：订单簿数据结构（为什么基于节点的容器会输给连续存储的有序 vector，以及查找策略应如何顺应更新集中的位置）、并发队列设计，以及如何用硬件计数器测量真正重要的指标。它以生产环境中实际使用的纳秒级技巧，更新了 2017 年那批演讲流传下来的经验之谈。作为 Carl Cook 经典演讲的续篇，值得必看。
 
 ## Trading at Light Speed — David Gross（Meeting C++ 2022，"以光速交易"） {#gross-2022}
 
@@ -71,7 +71,7 @@ Pikus 揭开 `std::atomic` 的面纱：原子性和内存序究竟保证了什�
 
 **来源：** [第 I 部分](https://www.youtube.com/watch?v=c1gO9aB9nbs) · [第 II 部分](https://www.youtube.com/watch?v=CmxkPChOcvw) · <span class="lvl lvl-a">高级</span> · 2014 年（至今仍是权威）
 
-Sutter 关于无锁（lock-free）编程基础的两部曲大师课：基于 exchange 的模式、ABA 问题，以及如何正确构建无锁单链表。第 I 部分建立心智模型并讲清什么时候*不该*用无锁；第 II 部分处理各种硬骨头，包括风险指针（hazard pointer）式的内存回收。虽已十年，但作为概念基础仍无可替代——现代演讲都默认你已消化了它。（旧页面上流传的第 II 部分链接，包括本站之前的版本，视频 ID 被截断了；上面的链接是正确的。）
+Sutter 关于无锁（lock-free）编程基础的两部曲大师课。第 I 部分建立心智模型并讲清什么时候*不该*用无锁（双重检查锁定、`call_once`、无锁信箱）；第 II 部分讲解无锁链表、ABA 问题，以及借助原子智能指针进行内存回收。虽已十年，但作为概念基础仍无可替代——现代演讲都默认你已消化了它。（旧页面上流传的第 II 部分链接，包括本站之前的版本，视频 ID 被截断了；上面的链接是正确的。）
 
 ## Erik Rigtorp — 低延迟 C++ 文章与库 {#rigtorp}
 
@@ -83,7 +83,7 @@ Sutter 关于无锁（lock-free）编程基础的两部曲大师课：基于 exc
 
 **来源：** [sites.google.com/site/1024cores](https://sites.google.com/site/1024cores/) · <span class="lvl lvl-a">高级</span> · 约 2010–2013 年（已迁址）
 
-Vyukov 关于无锁/无等待算法、内存模型、生产者-消费者队列分类学的经典参考，还有他那著名的 MPSC 队列设计——它被用在 Go 调度器内部和无数交易系统中。**警告：**旧的自定义域名 `1024cores.net` 已失效且被劫持（现在是垃圾站）——上面的 Google Sites 地址才是幸存的官方位置。内容属于 2010 年代，但其中的算法和"要事优先"（first things first）的方法论至今仍是基石。
+Vyukov 关于无锁/无等待算法、内存模型、生产者-消费者队列分类学的经典参考，还有他那著名的侵入式 MPSC 队列设计——被 JCTools、Akka 和无数交易系统沿用（他还设计了 Go 的可扩展 goroutine 调度器）。**警告：**旧的自定义域名 `1024cores.net` 已失效且被劫持（现在是垃圾站）——上面的 Google Sites 地址才是幸存的官方位置。内容属于 2010 年代，但其中的算法和"要事优先"（first things first）的方法论至今仍是基石。
 
 ## Aeron — 低延迟消息传输与集群 {#aeron}
 
@@ -101,19 +101,19 @@ Disruptor/Aeron 的作者回顾 25 年的交易所架构演进：从大型机，
 
 **来源：** [Disruptor](https://github.com/LMAX-Exchange/disruptor) · [Chronicle Queue](https://github.com/OpenHFT/Chronicle-Queue) · <span class="lvl lvl-i">进阶</span> · 持续维护至 2026 年
 
-Disruptor 是开创"机械同情"（mechanical sympathy）运动的环形缓冲区线程间消息模式；至今仍在维护（v4.x），其[用户指南](https://lmax-exchange.github.io/disruptor/)依然是最权威的读物。Chronicle Queue（Peter Lawrey 的 OpenHFT 出品）通过内存映射文件提供微秒级持久化消息——无 broker、一切落盘——被多家大型投资银行采用；Chronicle 25 系列支持 Java 21。两者共同定义了免垃圾回收（GC-free）的 Java 设计范式：预分配、享元（flyweight）、堆外内存。
+Disruptor 是开创"机械同情"（mechanical sympathy）运动的环形缓冲区线程间消息模式；项目已趋于稳定、更新不多（最新版本 4.0.0，2023 年 9 月），其[用户指南](https://lmax-exchange.github.io/disruptor/)依然是最权威的读物。Chronicle Queue（Peter Lawrey 的 OpenHFT 出品）通过内存映射文件提供微秒级持久化消息——无 broker、一切落盘——被多家大型投资银行采用；当前版本采用日历版本号（2026.x），并已全面支持 Java 25（2026 年 7 月）。两者共同定义了免垃圾回收（GC-free）的 Java 设计范式：预分配、享元（flyweight）、堆外内存。
 
 ## Azul Platform Prime（Zing）与 C4 无停顿垃圾收集器 {#azul-zing}
 
 **来源：** [docs.azul.com](https://docs.azul.com/prime/c4-garbage-collection.html) · <span class="lvl lvl-i">进阶</span> · 现行文档
 
-Azul 的 Zing JVM——现在以"Azul Zing Builds of OpenJDK"的形式打包在 Azul Platform Prime 中——凭借 C4（Continuously Concurrent Compacting Collector）垃圾收集器和 Falcon JIT，仍是无停顿 Java 的商业选项。本页文档讲解 C4 如何在没有 stop-the-world 停顿的情况下实现分代、完全并发的内存整理。可将其与 OpenJDK 免费的**分代 ZGC**（自 JDK 21 起为默认实现、在 JDK 25 中趋于成熟）对比权衡——后者已大幅缩小了在延迟敏感负载上的差距。
+Azul 的 Zing JVM——现在以"Azul Zing Builds of OpenJDK"的形式打包在 Azul Platform Prime 中——凭借 C4（Continuously Concurrent Compacting Collector）垃圾收集器和 Falcon JIT，仍是无停顿 Java 的商业选项。本页文档讲解 C4 如何在没有 stop-the-world 停顿的情况下实现分代、完全并发的内存整理。可将其与 OpenJDK 免费的**分代 ZGC**（JDK 21 引入，JDK 23 起成为 ZGC 的默认模式，JDK 24 起成为唯一模式；用 `-XX:+UseZGC` 启用——JVM 的默认收集器仍是 G1）对比权衡——后者已大幅缩小了在延迟敏感负载上的差距。
 
 ## Rust vs C++ for Trading Systems — Databento（交易系统中的 Rust 与 C++ 之争） {#rust-vs-cpp}
 
 **来源：** [databento.com](https://databento.com/blog/rust-vs-cpp) · <span class="lvl lvl-i">进阶</span> · 2025 年 8 月
 
-关于这两门语言在交易领域取舍的最接地气的公开比较，作者是一家在生产环境中同时运行两者的行情数据供应商。C++ 在生态成熟度、交易所连接库和极致调优的热路径上仍占上风；Rust 能提供几乎相同的延迟，同时在编译期消除内存缺陷，并可通过 C FFI 顺利地渐进式引入。文章反映的是 2026 年年中行业的实际共识，而非语言站队。
+关于这两门语言在交易领域取舍的最接地气的公开比较，作者是一家在生产环境中同时运行两者的行情数据供应商。C++ 在生态成熟度、交易所连接库和极致调优的热路径上仍占上风；Rust 可以做到与 C++ 相当的延迟，同时在编译期消除内存缺陷，并可通过 C FFI 顺利地渐进式引入。建议与同一家公司的反方观点对照阅读：[Why we didn't rewrite our feed handler in Rust](https://databento.com/blog/why-we-didnt-rewrite-our-feed-handler-in-rust)（2025 年 10 月），解释了他们最热的路径为何仍留在 C++（工具链，以及对缓存、NUMA 和内核旁路的底层控制）。两篇合起来反映的是行业的实际共识，而非语言站队。
 
 ## hftbacktest — Rust 高频交易回测框架 {#hftbacktest}
 

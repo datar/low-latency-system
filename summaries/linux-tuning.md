@@ -14,13 +14,13 @@ nav: home
 
 ## Optimizing RHEL for Real Time for Low Latency Operation (RHEL 9/10) {#rhel-rt}
 
-**Source:** [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux_for_real_time/9/html-single/optimizing_rhel_9_for_real_time_for_low_latency_operation/index) · <span class="lvl lvl-i">intermediate</span> · continuously updated (2022–2026)
+**Source:** [docs.redhat.com (RHEL 10)](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux_for_real_time/10/html-single/optimizing_rhel_for_real_time_for_low_latency_operation/index) · [RHEL 9 edition](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux_for_real_time/9/html-single/optimizing_rhel_9_for_real_time_for_low_latency_operation/index) · <span class="lvl lvl-i">intermediate</span> · continuously updated (2022–2026)
 
 Red Hat's current canonical guide for tuning a RHEL system to consistently low, predictable latency — the direct successor of the old RHEL 7 low-latency tuning article that this site linked for years. It covers TuneD real-time profiles, scheduler policies and priorities, CPU isolation and IRQ binding, memory locking and hugepages, avoiding TCP-stack and journaling latency, and running hardware/firmware latency tests with `hwlatdetect` and `rteval`. Since RHEL 9, the real-time kernel (`kernel-rt`) is included with standard RHEL — no separate product needed. Essential baseline reading for anyone deploying trading systems on RHEL 9/10.
 
-## Monitoring and Managing System Status and Performance (RHEL 9) {#rhel-perf}
+## Monitoring and Managing System Status and Performance (RHEL 9/10) {#rhel-perf}
 
-**Source:** [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/monitoring_and_managing_system_status_and_performance/index) · <span class="lvl lvl-b">beginner</span> · continuously updated
+**Source:** [docs.redhat.com (RHEL 10)](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/monitoring_and_managing_system_status_and_performance/index) · [RHEL 9 edition](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/monitoring_and_managing_system_status_and_performance/index) · <span class="lvl lvl-b">beginner</span> · continuously updated
 
 The modern replacement for the retired RHEL 7 *Performance Tuning Guide*. It introduces the concepts and tools of system performance work on a current RHEL: TuneD profiles, PCP/perf monitoring, network, memory, disk and CPU tuning chapters. Concepts transfer to CentOS Stream, Rocky, Alma and — with different tooling — other distributions. Read this first if you are new to Linux performance tuning; then go deeper with the real-time guide above.
 
@@ -34,7 +34,7 @@ The single most cited practitioner's checklist for tuning x86_64 Linux for HFT-s
 
 **Source:** [lwn.net](https://lwn.net/Articles/989212/) · <span class="lvl lvl-i">intermediate</span> · September 2024
 
-LWN's definitive account of PREEMPT_RT finally merging into mainline Linux 6.12, ending roughly twenty years of out-of-tree real-time patches. It explains what real-time preemption does (sleeping spinlocks, threaded interrupts), why the `printk` rewrite was the last blocker, and what mainlining means in practice: any stock 6.12+ kernel on x86/ARM64/RISC-V can be built with full RT preemption, with in-tree drivers and no patch maintenance. Context every trading-system builder should have when choosing a kernel in 2026.
+LWN's definitive account of PREEMPT_RT finally merging into mainline Linux 6.12, ending roughly twenty years of out-of-tree real-time patches. It explains what real-time preemption does (sleeping spinlocks, threaded interrupts), why the `printk` rewrite was the last blocker, and what mainlining means in practice: any stock 6.12+ kernel on x86/ARM64/RISC-V (later also LoongArch in 6.13 and 32-bit ARM in 7.1) can be built with full RT preemption, with in-tree drivers and no patch maintenance. Context every trading-system builder should have when choosing a kernel in 2026.
 
 ## SUSE Labs — CPU Isolation Series (Frederic Weisbecker) {#suse-cpu-isolation}
 
@@ -82,7 +82,7 @@ The upstream community's onboarding guide for the now-mainline PREEMPT_RT kernel
 
 **Source:** [PDF](https://www.redhat.com/files/summit/session-assets/2018/Performance-analysis-and-tuning-of-Red-Hat-Enterprise-Linux-Part-1.pdf) · <span class="lvl lvl-i">intermediate</span> · 2018 (historical)
 
-The slide deck from Red Hat's long-running Summit talk series on performance analysis and tuning. The original videos have been taken offline, but the slides survive and still show how Red Hat's performance engineers think: measure first, use tuned profiles as a baseline, then attack NUMA placement, hugepages and IRQ placement. Kept as a historical reference; for current material, use the RHEL 9 documentation above.
+The slide deck from Red Hat's long-running Summit talk series on performance analysis and tuning. The original videos have been taken offline, but the slides survive and still show how Red Hat's performance engineers think: measure first, use tuned profiles as a baseline, then attack NUMA placement, hugepages and IRQ placement. Kept as a historical reference; for current material, use the RHEL 10 (or RHEL 9) documentation above.
 
 ## Low Latency Performance Tuning for RHEL 7 (legacy PDF) {#rhel7-legacy}
 

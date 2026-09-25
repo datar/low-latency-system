@@ -38,7 +38,7 @@ The successor to the classic "Performance Tuning Guidelines for Mellanox Network
 
 ## NVIDIA XLIO Documentation (successor to VMA) {#xlio}
 
-**Source:** [networking-docs.nvidia.com/xlioswum](https://networking-docs.nvidia.com/xlioswum) · <span class="lvl lvl-a">advanced</span> · Rev 3.6x–3.70, 2025–2026
+**Source:** [networking-docs.nvidia.com/xlioswum](https://networking-docs.nvidia.com/xlioswum) · <span class="lvl lvl-a">advanced</span> · Rev 3.6x–3.80, 2025–2026 · source: [Mellanox/libxlio](https://github.com/Mellanox/libxlio)
 
 XLIO is NVIDIA's kernel-bypass sockets library and the designated successor to Mellanox VMA (forked from VMA 9.2.2). The docs cover the `LD_PRELOAD` usage model, TCP/UDP offload paths, polling/spinning tuning and socket-scaling limits on ConnectX NICs. Anyone with VMA tuning notes from the 2018 era should migrate here; legacy VMA docs remain at [networking-docs.nvidia.com/vmaswum](https://networking-docs.nvidia.com/vmaswum) for older deployments.
 
@@ -46,7 +46,7 @@ XLIO is NVIDIA's kernel-bypass sockets library and the designated successor to M
 
 **Source:** [developer.nvidia.com blog](https://developer.nvidia.com/blog/maximizing-low-latency-networking-performance-for-financial-services-with-nvidia-rivermax-and-neio-fastsocket/) · <span class="lvl lvl-i">intermediate</span> · September 2025
 
-NVIDIA's current pitch for trading workloads on ConnectX: Rivermax kernel-bypass zero-copy streaming plus the NEIO FastSockets library on top. Benchmarks show ~0.25 µs serialization delay (claimed 8× faster than standard sockets) and 3.35M pps dropless UDP receive, with GPUDirect for NIC-to-GPU paths. Useful for understanding how the Mellanox-heritage stack now competes with Onload for market-data workloads.
+NVIDIA's current pitch for trading workloads on ConnectX: Rivermax kernel-bypass zero-copy streaming plus the NEIO FastSockets library on top. Benchmarks (run on Windows with a 25GbE ConnectX-6) show ~0.25 µs serialization delay (claimed 8× faster than standard sockets) and 3.35M pps dropless UDP receive, with GPUDirect for NIC-to-GPU paths. Useful for understanding how the Mellanox-heritage stack now competes with Onload for market-data workloads.
 
 ## RDMA Aware Networks Programming User Manual {#rdma-manual}
 
@@ -58,7 +58,7 @@ The canonical replacement for the dead mellanox.com RDMA programming PDF this si
 
 **Source:** [arista.com](https://www.arista.com/en/products/7130-series) · <span class="lvl lvl-i">intermediate</span> · current; 25G generation Oct 2023
 
-After Cisco end-of-saled the entire Nexus 3550 (ex-Exablaze) switch line in April 2023 with no replacement, Arista's 7130 family (from the Metamako acquisition) became the de facto ultra-low-latency switching platform. The hub covers Layer-1 crosspoint switches (~4 ns port-to-port), MetaMux (~39 ns FPGA multiplexing for exchange-facing links), MetaWatch (tap/aggregation with sub-ns timestamping), and the 25G generation (7132LB: 150 ns L3 at 25GbE). Note the current frontier: 25GbE run FEC-off over short links, since FEC alone adds ~100+ ns.
+After Cisco end-of-saled the entire Nexus 3550 (ex-Exablaze) switch line in April 2023 with no replacement, Arista's 7130 family (from the Metamako acquisition) became the de facto ultra-low-latency switching platform. The hub covers Layer-1 crosspoint switches (~4 ns port-to-port), MetaMux (~39 ns FPGA multiplexing for exchange-facing links), MetaWatch (tap/aggregation with sub-ns timestamping), and the 25G generation (7132LB: 150 ns L3 at 25GbE). Note the current frontier: 25GbE run FEC-off over short links, since FEC alone adds ~100–250 ns per hop (RS-FEC up to ~250 ns, per [Arista](https://blogs.arista.com/blog/ultra-low-latency-25g-ethernet)).
 
 ## Measuring the Latency of a 4 ns Switch (Arista) {#arista-4ns}
 
@@ -70,7 +70,7 @@ A short engineering paper on how you even measure a device whose port-to-port la
 
 **Source:** [datasheet](https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/nexus-smartnic/datasheet-c78-743827.html) · [exanic-software on GitHub](https://github.com/cisco/exanic-software) · <span class="lvl lvl-i">intermediate</span> · maintenance mode
 
-Cisco acquired Exablaze in December 2019 and rebranded the ExaNIC line as Nexus SmartNIC (K3P-S = ExaNIC X25, K3P-Q = X100), with published software trigger-to-response as low as 568 ns and 4 ns RX timestamps. The `libexanic` driver stack remains open on GitHub. Listed with a caveat: the product line is effectively in maintenance mode and Cisco has exited the ULL switch business, so ecosystem momentum has moved to AMD Solarflare and the FPGA vendors. (The old exablaze.com blog this site linked is gone entirely.)
+Cisco acquired Exablaze (announced December 2019, closed February 2020) and rebranded the ExaNIC line as Nexus SmartNIC (K3P-S = ExaNIC X25, K3P-Q = X100), with published software trigger-to-response as low as 568 ns and 4 ns RX timestamps. The `libexanic` driver stack remains open on GitHub. Listed with a caveat: the product line is effectively in maintenance mode and Cisco has exited the ULL switch business, so ecosystem momentum has moved to AMD Solarflare and the FPGA vendors. (The old exablaze.com blog this site linked is gone entirely.)
 
 ## Kernel Bypass (Cloudflare) {#cf-kernel-bypass}
 

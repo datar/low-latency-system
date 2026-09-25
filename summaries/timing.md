@@ -14,7 +14,7 @@ nav: home
 
 ## How PTP Is Deployed at Meta {#meta-ptp}
 
-**Source:** [engineering.fb.com](https://engineering.fb.com/2022/11/21/production-engineering/precision-time-protocol-at-meta/) · <span class="lvl lvl-i">intermediate</span> · November 2022, updated 2024 (SPTP)
+**Source:** [engineering.fb.com](https://engineering.fb.com/2022/11/21/production-engineering/precision-time-protocol-at-meta/) · <span class="lvl lvl-i">intermediate</span> · November 2022 (follow-ups: [SPTP, Feb 2024](https://engineering.fb.com/2024/02/07/production-engineering/simple-precision-time-protocol-sptp-meta/); leap seconds, Feb 2025)
 
 Meta's canonical write-up of replacing NTP with PTP at hyperscale, achieving tens-of-nanosecond synchronization (~436 ns worst-case Window of Uncertainty) — roughly 100× better than their tuned NTP. Covers the full architecture: Time Card-based open time servers, hardware-timestamping NICs, and the open-source stack (`ptp4u` serving 1M+ clients, `fbclock`, `ptpcheck`, `oscillatord`, and the newer SPTP client). The best public case study of production PTP outside finance, directly applicable to trading infrastructure.
 
@@ -32,7 +32,7 @@ The sub-nanosecond timing technology that extends PTP with Synchronous Ethernet 
 
 ## Deutsche Börse / Eurex High Precision Time (White Rabbit) {#eurex-wr}
 
-**Source:** [eurex.com](https://www.eurex.com/ex-en/support/initiatives/archive/high-precision-time-white-rabbit-pilot) · <span class="lvl lvl-b">beginner</span> · pilot 2018–2019, permanent service since April 2019
+**Source:** [eurex.com](https://www.eurex.com/ex-en/support/initiatives/archive/high-precision-time-white-rabbit-pilot) · current service page: [Deutsche Börse Time Services](https://www.deutsche-boerse.com/dbg-en/markets-services/ps-technology/ps-7-market-technology/ps-n7/ps-connectivity-services-time-services) · <span class="lvl lvl-b">beginner</span> · pilot 2018–2019, permanent service since April 2019
 
 How an actual exchange distributes time to trading participants: co-location customers synchronize to the exact clock Deutsche Börse uses to generate its own high-precision timestamps, delivered over dedicated fiber cross-connects with sub-ns accuracy. Explains why exchange-anchored timing matters for latency measurement and fairness analysis. Deutsche Börse remains a White Rabbit Collaboration member.
 
@@ -46,7 +46,7 @@ Reference documentation for the standard Linux PTP stack: `ptp4l` (ordinary/boun
 
 **Source:** [redhat.com](https://www.redhat.com/en/blog/mifid-ii-rts-25-and-time-synchronisation-red-hat-enterprise-linux-and-red-hat-virtualization) · <span class="lvl lvl-b">beginner</span> · 2017, fundamentals still accurate
 
-Maps the EU regulatory requirement — ≤100 µs divergence from UTC with 1 µs timestamp granularity for HFT firms under RTS 25 — to concrete Linux capability numbers: ~30 µs for software-timestamped NTP/PTP, ~10 µs for hardware-timestamped NTP, ~3 µs or better for hardware-timestamped PTP. Explains why hardware-timestamping NICs are effectively mandatory for compliance. Note: RTS 25 is slated for replacement under the ongoing MiFID II review, but the technical guidance stands.
+Maps the EU regulatory requirement — ≤100 µs divergence from UTC with 1 µs timestamp granularity for HFT firms under RTS 25 — to concrete Linux capability numbers: ~30 µs for software-timestamped NTP/PTP, ~10 µs for hardware-timestamped NTP, ~3 µs or better for hardware-timestamped PTP. Explains why hardware-timestamping NICs are effectively mandatory for compliance. **Update (2026):** in the EU, RTS 25 (Delegated Regulation 2017/574) was repealed and replaced from 2 March 2026 by [Commission Delegated Regulation (EU) 2025/1155](https://eur-lex.europa.eu/eli/reg_del/2025/1155/oj/eng), now under MiFIR Art. 22c. The 100 µs maximum divergence for HFT and for the fastest venues is unchanged, the tightest timestamp granularity moved from 1 µs to 0.1 µs, and scope widened to systematic internalisers, APAs and consolidated-tape providers. The UK keeps its onshored RTS 25. The article's Linux technical guidance still applies.
 
 ## Real-world PTP Accuracy Across NICs (scottstuff.net) {#nic-ptp-accuracy}
 

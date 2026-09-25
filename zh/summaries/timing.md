@@ -15,7 +15,7 @@ nav: home
 
 ## Meta 如何部署 PTP {#meta-ptp}
 
-**来源：** [engineering.fb.com](https://engineering.fb.com/2022/11/21/production-engineering/precision-time-protocol-at-meta/) · <span class="lvl lvl-i">进阶</span> · 2022 年 11 月，2024 年更新（SPTP）
+**来源：** [engineering.fb.com](https://engineering.fb.com/2022/11/21/production-engineering/precision-time-protocol-at-meta/) · <span class="lvl lvl-i">进阶</span> · 2022 年 11 月（后续文章：[SPTP，2024 年 2 月](https://engineering.fb.com/2024/02/07/production-engineering/simple-precision-time-protocol-sptp-meta/)；闰秒处理，2025 年 2 月）
 
 Meta 关于在超大规模数据中心用 PTP 取代 NTP 的权威文章，实现了数十纳秒级的时钟同步（最坏情况的不确定性窗口约 436 ns）——比他们精心调优过的 NTP 好约 100 倍。文章覆盖完整架构：基于 Time Card 的开放时间服务器、支持硬件时间戳的网卡，以及开源软件栈（服务 100 万以上客户端的 `ptp4u`、`fbclock`、`ptpcheck`、`oscillatord`，以及较新的 SPTP 客户端）。这是金融行业之外最好的生产环境 PTP 公开案例，可直接借鉴到交易基础设施中。
 
@@ -33,7 +33,7 @@ Meta 关于在超大规模数据中心用 PTP 取代 NTP 的权威文章，实�
 
 ## 德意志交易所 / Eurex 高精度时间服务（White Rabbit） {#eurex-wr}
 
-**来源：** [eurex.com](https://www.eurex.com/ex-en/support/initiatives/archive/high-precision-time-white-rabbit-pilot) · <span class="lvl lvl-b">入门</span> · 2018–2019 年试点，2019 年 4 月起成为永久服务
+**来源：** [eurex.com](https://www.eurex.com/ex-en/support/initiatives/archive/high-precision-time-white-rabbit-pilot) · 当前服务页面：[Deutsche Börse Time Services](https://www.deutsche-boerse.com/dbg-en/markets-services/ps-technology/ps-7-market-technology/ps-n7/ps-connectivity-services-time-services) · <span class="lvl lvl-b">入门</span> · 2018–2019 年试点，2019 年 4 月起成为永久服务
 
 一个真实交易所如何向交易参与者分发时间：托管（co-location）客户直接同步到德意志交易所生成自身高精度时间戳所用的那个时钟，通过专用光纤交叉互连（cross-connect）交付，精度达亚纳秒级。文章解释了为什么以交易所为锚点的授时对延迟测量和公平性分析至关重要。德意志交易所至今仍是 White Rabbit 协作组织的成员。
 
@@ -47,7 +47,7 @@ Linux 标准 PTP 软件栈的参考文档：`ptp4l`（普通/边界/透明时钟
 
 **来源：** [redhat.com](https://www.redhat.com/en/blog/mifid-ii-rts-25-and-time-synchronisation-red-hat-enterprise-linux-and-red-hat-virtualization) · <span class="lvl lvl-b">入门</span> · 2017 年，基础内容至今仍然准确
 
-这篇文章把欧盟监管要求——RTS 25 规定高频交易机构与 UTC 的偏差不得超过 100 µs、时间戳粒度须达 1 µs——对应到 Linux 的实际能力数字：软件时间戳的 NTP/PTP 约 30 µs，硬件时间戳的 NTP 约 10 µs，硬件时间戳的 PTP 约 3 µs 或更好。文章解释了为什么硬件时间戳网卡对合规而言实际上是必备项。注意：在正在进行的 MiFID II 复审中 RTS 25 预计将被取代，但其技术指导依然成立。
+这篇文章把欧盟监管要求——RTS 25 规定高频交易机构与 UTC 的偏差不得超过 100 µs、时间戳粒度须达 1 µs——对应到 Linux 的实际能力数字：软件时间戳的 NTP/PTP 约 30 µs，硬件时间戳的 NTP 约 10 µs，硬件时间戳的 PTP 约 3 µs 或更好。文章解释了为什么硬件时间戳网卡对合规而言实际上是必备项。**更新（2026）：**在欧盟，RTS 25（授权条例 2017/574）已于 2026 年 3 月 2 日起废止，由[欧盟委员会授权条例 (EU) 2025/1155](https://eur-lex.europa.eu/eli/reg_del/2025/1155/oj/eng) 取代，法律依据改为 MiFIR 第 22c 条。高频交易及最快交易场所的 100 µs 最大偏差不变，最严格的时间戳粒度从 1 µs 收紧到 0.1 µs，适用范围扩大到系统性内部撮合商（SI）、APA 和综合行情提供商（CTP）。英国继续沿用其本土化的 RTS 25。文中关于 Linux 的技术指导依然适用。
 
 ## 各代网卡的实测 PTP 精度（scottstuff.net） {#nic-ptp-accuracy}
 

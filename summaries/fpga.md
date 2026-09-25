@@ -34,7 +34,7 @@ Industry analysis of the latency arms race after the 13.9 ns record. Compares th
 
 **Source:** [orthogone.com](https://orthogone.com/industries/high-frequency-trading-finance/) · <span class="lvl lvl-i">intermediate</span> · 2025
 
-A current vendor view of a full FPGA trading stack: ultra-low-latency IP cores including a 17.1 ns wire-to-wire Ethernet MAC/PCS and a 6.2 ns TX TCP/UDP offload engine, plus kernel-bypass PCIe DMA. Shows how modern hybrid CPU+FPGA systems are partitioned — data path in FPGA, strategy iteration in software — with concrete numbers like 585 ns FPGA-to-host round trip on overclocked Blackcore servers. Representative of the 2025 vendor ecosystem beyond Exegy/AMD (which acquired Enyx in 2022).
+A current vendor view of a full FPGA trading stack: ultra-low-latency IP cores including a 17.1 ns wire-to-wire Ethernet MAC/PCS and a 6.2 ns TX TCP/UDP offload engine, plus kernel-bypass PCIe DMA. Shows how modern hybrid CPU+FPGA systems are partitioned — data path in FPGA, strategy iteration in software — with concrete numbers like 585 ns FPGA-to-host round trip on overclocked Blackcore servers. Representative of the 2025 vendor ecosystem beyond Exegy (which acquired Enyx in 2022 and NovaSparks in January 2026) and AMD.
 
 ## FPGA Trading with Nasdaq ITCH & OUCH (Design Gateway) {#dgway-itch-ouch}
 
